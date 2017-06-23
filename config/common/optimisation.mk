@@ -1,6 +1,9 @@
 # Enable Compose in SystemUI by default.
 SYSTEMUI_USE_COMPOSE ?= true
 
+# Reduce system server verbosity.
+PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
+
 # EGL - Blobcache configuration
 PRODUCT_VENDOR_PROPERTIES += \
     ro.egl.blobcache.multifile=true \
