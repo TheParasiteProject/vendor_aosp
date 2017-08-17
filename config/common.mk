@@ -33,6 +33,9 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor
 
+# Disable vendor restrictions
+PRODUCT_RESTRICT_VENDOR_FILES := false
+
 # Apps
 $(call inherit-product, vendor/aosp/config/common/apps.mk)
 
