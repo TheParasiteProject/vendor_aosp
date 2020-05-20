@@ -164,6 +164,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.fflag.override.settings_app_locale_opt_in_enabled=false
 
+# Inherit art options
+include vendor/aosp/config/art.mk
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
