@@ -110,4 +110,8 @@
 
     <!-- Whether camera shutter sound is forced or not  (country specific). -->
     <bool name="config_camera_sound_forced">false</bool>
+
+    <!-- Should we vibrate on an icon animation of the shelf. This should only be active if the
+     vibrator is capable of subtle vibrations -->
+    <bool name="config_vibrateOnIconAnimation">true</bool>
 </resources>
