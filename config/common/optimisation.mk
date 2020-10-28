@@ -27,6 +27,10 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 PRODUCT_DISABLE_SCUDO ?= true
 MALLOC_SVELTE_FOR_LIBC32 ?= true
 
+# Zygote
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    zygote.critical_window.minute?=10
+
 # Inherit art options
 include vendor/aosp/config/common/art.mk
 
