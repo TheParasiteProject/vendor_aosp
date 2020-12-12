@@ -155,5 +155,8 @@
         <!-- Globally enable the new photo picker -->
         <item>storage_native_boot/take_over_get_content=true</item>
 
+        <!-- ART heap compaction for cached apps -->
+        <item>activity_manager/use_compaction=true</item>
+
     </string-array>
 </resources>
