@@ -19,6 +19,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.input.video_enabled=false
 
+# Disable MTE Async for system server
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    persist.arm64.memtag.system_server?=off
+
 # Disable Scudo to save RAM and use 32-bit libc variant by default
 PRODUCT_DISABLE_SCUDO ?= true
 MALLOC_SVELTE_FOR_LIBC32 ?= true
