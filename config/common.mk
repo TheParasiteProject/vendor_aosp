@@ -24,6 +24,11 @@ PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=1
 PRODUCT_SYSTEM_PROPERTIES += persist.sys.strictmode.disable=true
 endif
 
+# To prevent rebooting due to crashing services
+PRODUCT_SYSTEM_PROPERTIES += \
+    init.svc_debug.no_fatal.zygote=true \
+    persist.device_config.configuration.disable_rescue_party=true
+
 # Sensors
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor
