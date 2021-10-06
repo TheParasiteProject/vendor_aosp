@@ -168,7 +168,7 @@ PRODUCT_PACKAGES += \
 
 # Use gestures by default
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
