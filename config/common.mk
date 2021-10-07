@@ -158,6 +158,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.fflag.override.settings_app_locale_opt_in_enabled=false
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.frameworks.sensorservice@1.0.vendor
+
 # Inherit art options
 include vendor/aosp/config/art.mk
 
