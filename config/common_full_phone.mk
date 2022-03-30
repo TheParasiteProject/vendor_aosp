@@ -15,5 +15,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     net.tethering.noprovisioning=true
 
+# Disable mobile data by default
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.android.mobiledata=false
+
 # Inherit full common PixelExperience stuff
 $(call inherit-product, vendor/aosp/config/common_full.mk)
