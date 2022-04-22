@@ -25,3 +25,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Default wifi country code
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.boot.wificountrycode?=00
+
+# Diable phantom process monitoring
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.sys.fflag.override.settings_enable_monitor_phantom_procs?=false
