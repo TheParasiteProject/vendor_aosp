@@ -89,9 +89,15 @@ PRODUCT_PACKAGES += \
 # Filesystems tools
 PRODUCT_PACKAGES += \
     fsck.ntfs \
-    mke2fs \
     mkfs.ntfs \
     mount.ntfs
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/bin/fsck.ntfs \
+    system/bin/mkfs.ntfs \
+    system/bin/mount.ntfs \
+    system/%/libfuse-lite.so \
+    system/%/libntfs-3g.so
 
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
