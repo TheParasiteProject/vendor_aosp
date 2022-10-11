@@ -1,3 +1,7 @@
+# Battery Status Viewer
+PRODUCT_PACKAGES += \
+    BatteryStatsViewer
+
 # BtHelper
 PRODUCT_PACKAGES += \
     BtHelper
