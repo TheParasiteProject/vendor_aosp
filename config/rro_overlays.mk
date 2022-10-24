@@ -29,3 +29,6 @@ PRODUCT_PACKAGES += \
     SystemUIGoogleOverlay \
     StorageManagerGoogleOverlay \
     FlipendoOverlay
+
+PRODUCT_PACKAGES += \
+    SystemUICustomOverlay
