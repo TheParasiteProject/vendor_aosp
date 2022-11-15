@@ -28,6 +28,9 @@ PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.strictmode.disable=true
 endif
 
+# Don't compile SystemUITests
+EXCLUDE_SYSTEMUI_TESTS := true
+
 # Sensors
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor
