@@ -193,6 +193,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Aperture
 
+# BtHelper
+PRODUCT_PACKAGES += \
+    BtHelper
+
 # Use gestures by default
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
