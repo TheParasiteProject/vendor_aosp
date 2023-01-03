@@ -20,5 +20,5 @@
     <dimen name="global_actions_translate">0dp</dimen>
 
     <!--  Blur radius on status bar window and power menu  -->
-    <dimen name="max_window_blur_radius">175px</dimen>
+    <dimen name="max_window_blur_radius">17.5dp</dimen>
 </resources>
