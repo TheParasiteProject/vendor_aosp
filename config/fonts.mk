@@ -2,12 +2,6 @@
 PRODUCT_PACKAGES += \
     ArbutusSlab-Regular.ttf
 
-# google-sans family
-PRODUCT_PACKAGES += \
-    GoogleSans-Italic.ttf \
-    GoogleSans-Regular.ttf \
-    GoogleSansClock-Regular.ttf
-
 # Lustria family
 PRODUCT_PACKAGES += \
     Lustria-Regular.ttf
@@ -55,6 +49,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Barlow-Bold.ttf \
     Barlow-Medium.ttf
-
-PRODUCT_COPY_FILES += \
-    vendor/aosp/fonts/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
