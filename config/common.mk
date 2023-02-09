@@ -193,6 +193,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     GameSpace
 
+# Enable App Locale Settings to all apps
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.sys.fflag.override.settings_app_locale_opt_in_enabled=false
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
