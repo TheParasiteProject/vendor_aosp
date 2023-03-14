@@ -3,8 +3,7 @@ PRODUCT_PACKAGES += \
     NexusLauncherTabletOverlay
 
 # Tablet extension
-PRODUCT_PACKAGES += \
-    androidx.window.extensions
+$(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 
 # Inherit full common PixelExperience stuff
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
