@@ -32,5 +32,6 @@
         <item>lock_screen_long_press_enabled=true</item>
         <item>lockscreen_custom_clocks=true</item>
         <item>media_explicit_indicator=true</item>
+        <item>revamped_wallpaper_ui=true</item>
     </string-array>
 </resources>
