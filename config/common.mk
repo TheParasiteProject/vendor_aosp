@@ -131,10 +131,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     sys.fflag.override.settings_volume_panel_in_systemui=true
 
-# NavigationBarMode
-PRODUCT_PACKAGES += \
-    NavigationBarMode2ButtonOverlay
-
 # Hide navigation bar hint
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
