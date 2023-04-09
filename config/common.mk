@@ -180,6 +180,10 @@ endif
 # Enable Compose in SystemUI by default.
 SYSTEMUI_USE_COMPOSE ?= true
 
+# Monochromatic monet theme style
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.sysui.monochromatic=true
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
