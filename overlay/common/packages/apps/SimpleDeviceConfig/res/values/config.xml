@@ -35,6 +35,9 @@
         <!-- Use new privacy indicators for location -->
         <item>privacy/location_indicators_enabled=true</item>
 
+        <!-- Whether to show location indicators -->
+        <item>privacy/location_indicator_settings_enabled=true</item>
+
         <!-- Enable permission hub v2 -->
         <item>privacy/permissions_hub_enabled=true</item>
         <item>privacy/permissions_hub_2_enabled=true</item>
