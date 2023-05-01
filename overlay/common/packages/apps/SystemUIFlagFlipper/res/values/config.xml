@@ -33,5 +33,6 @@
         <item>lockscreen_custom_clocks=true</item>
         <item>media_explicit_indicator=true</item>
         <item>revamped_wallpaper_ui=true</item>
+        <item>new_back_affordance=true</item>
     </string-array>
 </resources>
