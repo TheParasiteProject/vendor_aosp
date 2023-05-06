@@ -68,3 +68,7 @@ PRODUCT_PACKAGES += \
     procmem \
     procrank
 endif
+
+# Extra cmdline tools
+PRODUCT_PACKAGES += \
+    zstd
