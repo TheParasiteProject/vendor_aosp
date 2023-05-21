@@ -189,6 +189,10 @@ SYSTEMUI_USE_COMPOSE ?= true
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sysui.monochromatic=true
 
+# GameSpace
+PRODUCT_PACKAGES += \
+    GameSpace
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
