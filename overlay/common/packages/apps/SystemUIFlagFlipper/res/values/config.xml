@@ -16,11 +16,11 @@
 -->
 <resources>
     <string-array name="flags">
-        <item>216=true</item>
-        <item>901=true</item>
-        <item>907=true</item>
-        <item>909=true</item>
-        <item>1102=true</item>
-        <item>2500=true</item>
+        <item>customizable_lock_screen_quick_affordances=true</item>
+        <item>media_session_actions=true</item>
+        <item>umo_surface_ripple=true</item>
+        <item>umo_turbulence_noise=true</item>
+        <item>record_task_content=true</item>
+        <item>output_switcher_advanced_layout=true</item>
     </string-array>
 </resources>
