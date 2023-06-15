@@ -30,5 +30,6 @@
         <item>monochromatic=true</item>
         <item>enable_font_scaling_tile=true</item>
         <item>lock_screen_long_press_enabled=true</item>
+        <item>lockscreen_custom_clocks=true</item>
     </string-array>
 </resources>
