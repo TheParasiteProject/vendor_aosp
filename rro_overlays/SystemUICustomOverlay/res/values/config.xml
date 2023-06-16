@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Package name for the app that implements the wallpaper picker. -->
+    <string name="config_wallpaperPickerPackage" translatable="false">
+        com.google.android.apps.wallpaper
+    </string>
 </resources>
