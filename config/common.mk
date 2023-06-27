@@ -175,17 +175,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
 
-# Face Unlock
-TARGET_FACE_UNLOCK_SUPPORTED ?= true
-ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
-PRODUCT_PACKAGES += \
-    FaceUnlockService
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
-endif
-
 # Enable Compose in SystemUI by default.
 SYSTEMUI_USE_COMPOSE ?= true
 
