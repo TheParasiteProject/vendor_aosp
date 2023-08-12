@@ -5,22 +5,6 @@ PRODUCT_BRAND ?= TheParasiteProject
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.com.google.clientidbase=android-google
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.clientidbase=android-google
-
-else
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
-
-endif
-
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.debug.alloc=0 \
     ro.com.android.dataroaming=false \
@@ -136,11 +120,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
 
-# Dex preopt
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUIGoogle \
-    NexusLauncherRelease
-
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
@@ -169,10 +148,6 @@ endif
 # BtHelper
 PRODUCT_PACKAGES += \
     BtHelper
-
-# Use gestures by default
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= $(TARGET_SUPPORTS_64_BIT_APPS)
@@ -213,11 +188,5 @@ $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
 
 # Themes
 $(call inherit-product, vendor/aosp/config/themes.mk)
-
-# Pixel Framework
-$(call inherit-product, vendor/pixel-framework/config.mk)
-
-# Themed icons
-$(call inherit-product, packages/overlays/ThemeIcons/config.mk)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk

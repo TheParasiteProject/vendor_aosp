@@ -16,5 +16,4 @@
 
 <config>
     <allow-in-power-save package="com.android.deskclock" />
-    <allow-in-power-save package="com.google.android.deskclock" />
 </config>
