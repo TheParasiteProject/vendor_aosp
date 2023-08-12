@@ -1,6 +1,4 @@
-# Launcher overlay
-PRODUCT_PACKAGES += \
-    NexusLauncherTabletOverlay
+TARGET_DEVICE_IS_TABLET := true
 
 # Tablet extension
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)

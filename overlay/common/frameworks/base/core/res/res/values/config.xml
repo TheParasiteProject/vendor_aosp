@@ -17,44 +17,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Disable stock components if installed -->
-    <string-array name="config_globallyDisabledComponents" translatable="false">
-        <!-- Disable stock OTA components if installed -->
-        <item>com.android.vending/com.google.android.finsky.systemupdate.SystemUpdateSettingsContentProvider</item>
-        <item>com.android.vending/com.google.android.finsky.systemupdateactivity.SettingsSecurityEntryPoint</item>
-        <item>com.android.vending/com.google.android.finsky.systemupdateactivity.SystemUpdateActivity</item>
-        <item>com.google.android.gms/com.google.android.gms.update.OtaSuggestionSummaryProvider</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateActivity</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateGcmTaskService</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService</item>
-        <item>com.google.android.gms/com.google.android.gms.update.phone.PopupDialog</item>
-        <!-- Disable Now Playing -->
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.AddShortcutActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryContentProvider</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSettingsActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicNotificationsSettingsActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSetupWizardActivity</item>
-        <item>com.google.android.dialer/com.android.dialer.rtt.settings.impl.gateway.RttSettingsDeepLink</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.ActiveReceiver</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.Receiver</item>
-        <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService.SecretCodeReceiver</item>
-        <item>com.google.android.gms/com.google.android.gms.chimera.GmsIntentOperationService$GmsExternalReceiver</item>
-    </string-array>
-
-    <string-array name="config_locationExtraPackageNames" translatable="false">
-        <!-- Bluetooth -->
-        <item>com.android.bluetooth</item>
-        <!-- TeleService -->
-        <item>com.android.phone</item>
-        <!-- CneApp -->
-        <item>com.qualcomm.qti.cne</item>
-        <!-- ImsService -->
-        <item>com.shannon.imsservice</item>
-        <!-- MediaTek ImsService -->
-        <item>com.mediatek.ims</item>
-    </string-array>
-
     <bool name="config_cellBroadcastAppLinks">true</bool>
 
     <!-- Set this to true to enable the platform's auto-power-save modes like doze and
@@ -83,10 +45,6 @@
     <!-- Make the gesture options show up -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
 
-    <!-- Config for whether Safety Protection is enabled. -->
-    <bool name="config_safetyProtectionEnabled">true</bool>
-    <string name="safety_protection_display_text">&lt;font face=\"google-sans\">Protected by &lt;/font>&lt;font face=\"google-sans-medium\">Android&lt;/font></string>
-
     <!-- Amount of time in ms the user needs to press the relevant keys to trigger the
          screenshot chord -->
     <integer name="config_screenshotChordKeyTimeout">1</integer>
@@ -105,23 +63,9 @@
     -->
     <integer name="config_defaultNightMode">0</integer>
 
-    <!-- Suppress Intent Filter Verification Service crashes and System UI ANRs (both AOSP bugs) -->
-    <string translatable="false" name="config_appsNotReportingCrashes">android,com.android.statementservice,com.android.systemui,com.google.android.as,com.google.android.tts</string>
-
     <!-- The type of the light sensor to be used by the display framework for things like
          auto-brightness. If unset, then it just gets the default sensor of type TYPE_LIGHT. -->
     <string name="config_displayLightSensorType" translatable="false">android.sensor.light</string>
-
-    <!-- Default list of files pinned by the Pinner Service -->
-    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
-        <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
-        <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
-        <item>"/system/framework/framework.jar"</item>
-        <item>"/system/framework/services.jar"</item>
-        <item>"/system/bin/surfaceflinger"</item>
-        <item>"/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
-        <item>"/system_ext/priv-app/SystemUIGoogle/oat/arm64/SystemUIGoogle.odex"</item>
-    </string-array>
 
     <!-- The default journal mode to use use when Write-Ahead Logging is not active.
          Choices are: OFF, DELETE, TRUNCATE, PERSIST and MEMORY.
@@ -150,140 +94,4 @@
          running in WAL mode.
          Choices are: FULL, NORMAL, OFF. -->
     <string name="db_wal_sync_mode" translatable="false">OFF</string>
-
-    <!-- Define device configs on boot -->
-    <string-array name="global_device_configs_override">
-        <!-- Machine learning back gesture (requires TensorFlow model) -->
-        <item>systemui/use_back_gesture_ml_model=true</item>
-        <item>systemui/back_gesture_ml_model_name=backgesture</item>
-        <item>systemui/back_gesture_ml_model_threshold=0.8</item>
-
-        <!-- Don't pin camera app to save memory -->
-        <item>runtime_native_boot/pin_camera=false</item>
-
-        <!-- Enable the new and advanced Privacy Hub -->
-        <item>privacy/safety_center_is_enabled=true</item>
-
-        <!-- Keep up to 7 days of permission usage history -->
-        <item>privacy/discrete_history_cutoff_millis=604800000</item>
-        <item>privacy/privacy_dashboard_7_day_toggle=true</item>
-
-        <!-- Use new privacy indicators for location -->
-        <item>privacy/location_indicators_enabled=true</item>
-
-        <!-- Whether to show location indicators -->
-        <item>privacy/location_indicator_settings_enabled=true</item>
-
-        <!-- Enable protected by android banner -->
-        <item>privacy/safety_protection_enabled=true</item>
-
-        <!-- Enable permission hub v2 -->
-        <item>privacy/permissions_hub_enabled=true</item>
-        <item>privacy/permissions_hub_2_enabled=true</item>
-
-        <!--
-            Device Personalization Services (AiAi)
-        -->
-
-        <!-- Smartspace -->
-        <item>device_personalization_services/Cell__enable_cell=true</item>
-        <item>device_personalization_services/Cell__enable_smartspace_events=true</item>
-        <item>device_personalization_services/EchoSmartspace__check_notification_visibility=true</item>
-        <item>device_personalization_services/EchoSmartspace__doorbell_when_for_update_time=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_add_contextual_feedback_button_on_long_press=false</item>
-        <item>device_personalization_services/EchoSmartspace__enable_add_internal_feedback_button=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_agsa_settings_read=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_cross_feature_rank_dedup_twiddler=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_dimensional_logging=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_encode_subcard_into_smartspace_target_id=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_flight_landing_smartspace_aiai=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_hotel_smartspace_aiai=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_media_recs_for_driving=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_predictor_expiration=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_ring_channels_regex=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_ring_using_ui_template=true</item>
-        <item>device_personalization_services/EchoSmartspace__enable_travel_features_type_merge=true</item>
-        <item>device_personalization_services/EchoSmartspace__ring_channels_regex=4_ding_channel_notification\d+</item>
-        <item>device_personalization_services/EchoSmartspace__ring_lockscreen_delay_seconds=0</item>
-        <item>device_personalization_services/EchoSmartspace__ring_on_aod_only=true</item>
-        <item>device_personalization_services/EchoSmartspace__runtastic_check_pause_action=true</item>
-        <item>device_personalization_services/EchoSmartspace__runtastic_is_ongoing_default_true=true</item>
-        <item>device_personalization_services/EchoSmartspace__smartspace_enable_daily_forecast=true</item>
-        <item>device_personalization_services/EchoSmartspace__smartspace_enable_timely_reminder=true</item>
-        <item>device_personalization_services/EchoSmartspace__strava_check_stop_action=true</item>
-        <item>device_personalization_services/Echo__smartspace_dedupe_fast_pair_notification=true</item>
-        <item>device_personalization_services/Echo__smartspace_doorbell_aiai_loading_screen=false</item>
-        <item>device_personalization_services/Echo__smartspace_doorbell_loading_screen_state=4</item>
-        <item>device_personalization_services/Echo__smartspace_enable_async_icon=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_battery_notification_parser=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_bedtime_active_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_bedtime_reminder_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_bluetooth_metadata_parser=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_cross_device_timer=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_dark_launch_outlook_events=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_doorbell=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_doorbell_context_wrapper=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_doorbell_extras=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_dwb_bedtime_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_earthquake_alert_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_echo_settings=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_echo_unified_settings=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_eta_doordash=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_eta_lyft=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_food_delivery_eta=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_grocery=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_light_off_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_light_predictor=false</item>
-        <item>device_personalization_services/Echo__smartspace_enable_media_wake_lock_acquire=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_nap=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_nudge=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_outlook_events=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_package_delivery=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_paired_device_connections=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_paired_device_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_ridesharing_eta=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_safety_check_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_score_ranker=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_sensitive_notification_twiddler=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_step_predictor=true</item>
-        <item>device_personalization_services/Echo__smartspace_enable_subcard_logging=true</item>
-        <item>device_personalization_services/Echo__smartspace_gaia_twiddler=true</item>
-        <item>device_personalization_services/Echo__smartspace_outlook_event_source_of_truth=TEXT_ONLY</item>
-        <item>device_personalization_services/Echo__smartspace_package_delivery_card_delay_seconds=0</item>
-        <item>device_personalization_services/Echo__smartspace_show_cross_device_timer_label=true</item>
-        <item>device_personalization_services/Echo__smartspace_use_flashlight_action_chip=true</item>
-        <item>device_personalization_services/Echo_smartspace__enable_flight_landing_smartspace_aiai=true</item>
-        <item>device_personalization_services/Echo_smartspace__enable_hotel_smartspace_aiai=true</item>
-        <item>device_personalization_services/Echo_smartspace__smartspace_enable_daily_forecast=true</item>
-        <item>device_personalization_services/Echo_smartspace__smartspace_enable_timely_reminder=true</item>
-
-        <!-- Pixel Launcher -->
-        <item>launcher/ENABLE_LOCAL_RECOMMENDED_WIDGETS_FILTER=true</item>
-        <item>launcher/ENABLE_SMARTSPACE_ENHANCED=true</item>
-        <item>launcher/enable_quick_launch_v3_qsb=true</item>
-        <item>launcher/enable_quick_launch_v3_aa=true</item>
-        <item>launcher/gboard_update_enter_key=true</item>
-        <item>launcher/enable_web_suggest_on_default_browser=true</item>
-
-        <!-- System Ui -->
-        <item>systemui/clipboard_overlay_show_actions=true</item>
-        <item>systemui/quick_access_wallet_enabled=true</item>
-        <item>systemui/enable_screenshot_corner_flow=true</item>
-        <item>systemui/enable_screenshot_notification_smart_actions=true</item>
-        <item>systemui/enable_screenshot_scrolling=true</item>
-        <item>systemui/volume_separate_notification=true</item>
-
-        <!-- Notifications -->
-        <item>notification_assistant/generate_actions=true</item>
-        <item>notification_assistant/generate_replies=true</item>
-
-        <!-- Globally enable the new photo picker -->
-        <item>storage_native_boot/take_over_get_content=true</item>
-
-        <!-- Allow more cached apps in the background -->
-        <item>activity_manager/max_cached_processes=64</item>
-
-        <!-- ART heap compaction for cached apps -->
-        <item>activity_manager/use_compaction=true</item>
-    </string-array>
 </resources>
