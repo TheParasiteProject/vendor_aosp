@@ -5,10 +5,8 @@ include vendor/aosp/config/BoardConfigQcom.mk
 endif
 
 # Custom AVB Key
-ifneq ($(filter OFFICIAL CI,$(CUSTOM_BUILD_TYPE)),)
 ifeq ($(TARGET_USES_CUSTOM_AVB_KEY),true)
 include vendor/aosp/config/BoardConfigAvb.mk
-endif
 endif
 
 include vendor/aosp/config/BoardConfigSoong.mk
