@@ -62,19 +62,6 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 SYSTEM_OPTIMIZE_JAVA ?= true
 SYSTEMUI_OPTIMIZE_JAVA ?= true
 
-# Filesystems tools
-PRODUCT_PACKAGES += \
-    fsck.ntfs \
-    mkfs.ntfs \
-    mount.ntfs
-
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-    system/bin/fsck.ntfs \
-    system/bin/mkfs.ntfs \
-    system/bin/mount.ntfs \
-    system/%/libfuse-lite.so \
-    system/%/libntfs-3g.so
-
 # Flags
 PRODUCT_PACKAGES += \
     SystemUIFlagFlipper
@@ -186,5 +173,8 @@ $(call inherit-product, device/parasite/sepolicy/common/sepolicy.mk)
 
 # Themes
 $(call inherit-product, vendor/aosp/config/themes.mk)
+
+# Tools
+$(call inherit-product, vendor/aosp/config/tools.mk)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
