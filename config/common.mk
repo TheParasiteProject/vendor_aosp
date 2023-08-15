@@ -181,6 +181,9 @@ $(call inherit-product, vendor/gms/products/gms.mk)
 # RRO Overlays
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
 
+# Sepolicies
+$(call inherit-product, device/parasite/sepolicy/common/sepolicy.mk)
+
 # Themes
 $(call inherit-product, vendor/aosp/config/themes.mk)
 
