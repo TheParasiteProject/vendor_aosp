@@ -10,6 +10,7 @@ PRODUCT_PACKAGES += \
     libsepol \
     micro_bench \
     mke2fs \
+    nano \
     oprofiled \
     pigz \
     powertop \
