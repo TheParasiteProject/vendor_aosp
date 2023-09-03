@@ -55,6 +55,9 @@ PRODUCT_PACKAGES += \
     ssh-keygen \
     start-ssh
 
+PRODUCT_COPY_FILES += \
+    vendor/aosp/prebuilt/common/etc/init/init.openssh.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.openssh.rc
+
 # rsync
 PRODUCT_PACKAGES += \
     rsync
