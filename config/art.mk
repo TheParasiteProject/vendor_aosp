@@ -19,11 +19,6 @@ PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-im
 # System server compiler
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
-# Speed apps
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUI \
-    Settings
-
 # Dexopt boot types
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     pm.dexopt.first-boot=extract \
