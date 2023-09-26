@@ -162,6 +162,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Inherit art options
 include vendor/aosp/config/art.mk
 
+# Inherit LMKD options
+include vendor/aosp/config/lmkd.mk
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
