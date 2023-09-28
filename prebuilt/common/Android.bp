@@ -3,3 +3,16 @@ java_import {
     jars: ["lib/vendorAacHardwareRichtapVibrator.jar"],
     sdk_version: "current",
 }
+
+prebuilt_etc {
+    name: "init.parasite.rc",
+    src: "etc/init/init.parasite.rc",
+    sub_dir: "init",
+    product_specific: true,
+}
+
+sh_binary {
+    name: "init.parasite.sh",
+    src: "bin/init.parasite.sh",
+    product_specific: true,
+}

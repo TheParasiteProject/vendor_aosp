@@ -1,0 +1,5 @@
+service parasite-sh /vendor/bin/init.parasite.sh
+    class late_start
+    user root
+    group root system radio
+    oneshot
