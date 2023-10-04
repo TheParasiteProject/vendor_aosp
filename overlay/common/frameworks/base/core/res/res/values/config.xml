@@ -98,4 +98,7 @@
     <!-- Whether the lock screen is allowed to run its own live wallpaper,
          different from the home screen wallpaper. -->
     <bool name="config_independentLockscreenLiveWallpaper">true</bool>
+
+    <!-- Whether the swap navbar feature is available -->
+    <bool name="config_navBarButtonSwapAvailable">true</bool>
 </resources>
