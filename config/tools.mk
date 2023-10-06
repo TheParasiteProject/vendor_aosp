@@ -5,7 +5,6 @@ PRODUCT_PACKAGES += \
     bzip2 \
     curl \
     gdbserver \
-    htop \
     lib7z \
     libsepol \
     micro_bench \
