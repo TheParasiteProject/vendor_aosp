@@ -13,3 +13,8 @@
 #
 # For now, just skip the ABI checks to fix build errors.
 export SKIP_ABI_CHECKS=true
+
+for i in `find hardware/qcom-caf/*/** -name "Android.bp"` `find vendor/qcom/opensource/*/** -name "Android.bp"`;
+do
+    sed -i '/clang:/d' $i
+done
