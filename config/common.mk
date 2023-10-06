@@ -169,6 +169,7 @@ include vendor/aosp/config/lmkd.mk
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
 # GApps
+TARGET_INCLUDE_PIXEL_FRAMEWORKS := false
 $(call inherit-product, vendor/gms/products/gms.mk)
 
 # RRO Overlays
