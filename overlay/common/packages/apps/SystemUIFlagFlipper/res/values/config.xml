@@ -20,5 +20,7 @@
         <item>record_task_content=true</item>
         <item>enable_new_qs_edit_mode=true</item>
         <item>biometrics_animation_revamp=true</item>
+        <item>enable_lockscreen_wallpaper_dream=true</item>
+        <item>split_shade_subpixel_optimization=true</item>
     </string-array>
 </resources>
