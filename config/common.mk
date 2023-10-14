@@ -156,6 +156,10 @@ endif
 # Enable Compose in SystemUI by default.
 SYSTEMUI_USE_COMPOSE ?= true
 
+# Enable lockscreen live wallpaper
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.wm.debug.lockscreen_live_wallpaper=true
+
 # GameSpace
 PRODUCT_PACKAGES += \
     GameSpace
