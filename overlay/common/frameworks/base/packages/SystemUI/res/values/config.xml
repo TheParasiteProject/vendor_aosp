@@ -36,4 +36,7 @@
     <string name="quick_settings_tiles_default" translatable="false">
         wifi,cell,location,bt,flashlight,airplane,nfc,hotspot,battery,screenrecord,mictoggle,cameratoggle
     </string>
+
+    <!-- Whether to show a warning notification when device's skin temperature is high. -->
+    <integer name="config_showTemperatureWarning">1</integer>
 </resources>
