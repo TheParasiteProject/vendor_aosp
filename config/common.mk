@@ -157,6 +157,11 @@ include vendor/aosp/config/art.mk
 # Inherit LMKD options
 include vendor/aosp/config/lmkd.mk
 
+# EGL - Blobcache configuration
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.egl.blobcache.multifile=true \
+    ro.egl.blobcache.multifile_limit=33554432
+
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
