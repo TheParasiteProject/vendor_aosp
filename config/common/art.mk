@@ -8,8 +8,14 @@ ART_BUILD_HOST_NDEBUG := true
 ART_BUILD_HOST_DEBUG := false
 USE_DEX2OAT_DEBUG := false
 
+# Enable whole-program R8 Java optimizations for SystemUI and system_server,
+# but also allow explicit overriding for testing and development.
+SYSTEM_OPTIMIZE_JAVA ?= true
+SYSTEMUI_OPTIMIZE_JAVA ?= true
+
 # Disable debug infos
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    dalvik.vm.debug.alloc=0 \
     dalvik.vm.dex2oat-minidebuginfo=false \
     dalvik.vm.minidebuginfo=false
 
