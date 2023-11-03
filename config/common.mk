@@ -5,7 +5,7 @@ PRODUCT_BRAND ?= TheParasiteProject
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.debug.alloc=0 \
     ro.com.android.dataroaming=false \
     ro.com.android.dateformat=MM-dd-yyyy \
@@ -13,15 +13,15 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=adb
+PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=0
+PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=adb
 else
 # Enable ADB authentication
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.usb.config=none
+PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=1
+PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=none
 
 # Disable extra StrictMode features on all non-engineering builds
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += persist.sys.strictmode.disable=true
+PRODUCT_SYSTEM_PROPERTIES += persist.sys.strictmode.disable=true
 endif
 
 # Some permissions
@@ -47,7 +47,7 @@ PRODUCT_COPY_FILES += \
     vendor/aosp/misc/keylayout/Vendor_2dc8_Product_6006.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_2dc8_Product_6006.kl
 
 # Enforce privapp-permissions whitelist
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     ro.control_privapp_permissions=enforce
 
 # Power whitelist
@@ -72,11 +72,11 @@ PRODUCT_PACKAGES += \
     SystemUIFlagFlipper
 
 # Storage manager
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     ro.storage_manager.enabled=true
 
 # Media
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
 # Overlays
@@ -100,14 +100,14 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.support_one_handed_mode=true \
 
 # Enable SystemUIDialog volume panel
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     sys.fflag.override.settings_volume_panel_in_systemui=true
 
 # Hide navigation bar hint
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
 # Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
@@ -147,7 +147,7 @@ PRODUCT_PACKAGES += \
 SYSTEMUI_USE_COMPOSE ?= true
 
 # Enable lockscreen live wallpaper
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     persist.wm.debug.lockscreen_live_wallpaper=true
 
 # GameSpace
@@ -155,7 +155,7 @@ PRODUCT_PACKAGES += \
     GameSpace
 
 # Enable App Locale Settings to all apps
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.fflag.override.settings_app_locale_opt_in_enabled=false
 
 # Sensors

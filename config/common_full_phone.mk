@@ -12,7 +12,7 @@ PRODUCT_PACKAGES += \
 
 # Tethering - allow without requiring a provisioning app
 # (for devices that check this)
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+PRODUCT_SYSTEM_PROPERTIES += \
     net.tethering.noprovisioning=true
 
 # Inherit full common PixelExperience stuff
