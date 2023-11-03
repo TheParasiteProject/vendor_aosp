@@ -1,3 +1,5 @@
+PRODUCT_BRAND ?= TheParasiteProject
+
 CUSTOM_BUILD_DATE := $(shell date +%Y%m%d-%H%M)
 CUSTOM_BUILD_DATE_UTC := $(shell date '+%Y-%m-%d %H:%M UTC %s')
 
