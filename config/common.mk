@@ -51,7 +51,6 @@ $(call inherit-product, vendor/aosp/config/common/configs.mk)
 $(call inherit-product, vendor/aosp/config/common/fonts.mk)
 
 # GMS
-TARGET_INCLUDE_PIXEL_FRAMEWORKS := false
 $(call inherit-product, vendor/gms/products/gms.mk)
 
 # Languages
