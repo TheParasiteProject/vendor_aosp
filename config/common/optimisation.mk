@@ -4,6 +4,7 @@ EXCLUDE_SYSTEMUI_TESTS := true
 # Reduce system server verbosity.
 ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
+PRODUCT_OTHER_JAVA_DEBUG_INFO := false
 endif
 
 # Shutdown
