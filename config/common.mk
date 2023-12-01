@@ -47,6 +47,9 @@ PRODUCT_COPY_FILES += \
 # Apps
 $(call inherit-product, vendor/aosp/config/common/apps.mk)
 
+# Certification
+$(call inherit-product-if-exists, vendor/certification/config.mk)
+
 # Configs
 $(call inherit-product, vendor/aosp/config/common/configs.mk)
 
