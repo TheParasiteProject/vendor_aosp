@@ -22,5 +22,6 @@
         <item>biometrics_animation_revamp=true</item>
         <item>enable_lockscreen_wallpaper_dream=true</item>
         <item>split_shade_subpixel_optimization=true</item>
+        <item>enable_new_privacy_dialog=true</item>
     </string-array>
 </resources>
