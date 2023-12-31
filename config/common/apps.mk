@@ -9,8 +9,8 @@ PRODUCT_PACKAGES += \
 endif
 
 # GameSpace
-PRODUCT_PACKAGES += \
-    GameSpace
+# PRODUCT_PACKAGES += \
+#     GameSpace
 
 # SystemUI Flag configuration
 PRODUCT_PACKAGES += \
@@ -21,8 +21,8 @@ PRODUCT_PACKAGES += \
     QuickAccessWallet
 
 # TouchGestures
-PRODUCT_PACKAGES += \
-    TouchGestures
+# PRODUCT_PACKAGES += \
+#     TouchGestures
 
 # Face Unlock
 ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
