@@ -43,5 +43,8 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
+# Parasite Resources
+$(call inherit-product-if-exists, vendor/parasite/config.mk)
+
 # Parasite Prebuilts
 $(call inherit-product-if-exists, vendor/parasite-prebuilts/config.mk)
