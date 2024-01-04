@@ -18,6 +18,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SystemUICustomOverlay
 
+# Settings Customisation
+PRODUCT_PACKAGES += \
+    SettingsCustomOverlay
+
+# Shell Customisation
+PRODUCT_PACKAGES += \
+    ShellOverlay
+
 # Themes
 PRODUCT_PACKAGES += \
     AndroidBlackThemeOverlay
