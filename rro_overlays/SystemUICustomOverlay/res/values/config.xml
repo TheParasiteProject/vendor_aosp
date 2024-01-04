@@ -5,4 +5,15 @@
 
     <!-- Whether or not long-pressing on keyguard will display to customize lockscreen -->
     <bool name="long_press_keyguard_customize_lockscreen_enabled">true</bool>
+
+    <!-- Icons that don't show in a collapsed non-keyguard statusbar -->
+    <string-array name="config_collapsed_statusbar_icon_blocklist" translatable="false">
+    </string-array>
+
+    <!-- Icons that don't show in a collapsed statusbar on keyguard -->
+    <string-array name="config_keyguard_statusbar_icon_blocklist" translatable="false">
+    </string-array>
+
+    <!-- Whether to show a warning notification when device's skin temperature is high. -->
+    <integer name="config_showTemperatureWarning">1</integer>
 </resources>
