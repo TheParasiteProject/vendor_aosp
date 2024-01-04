@@ -22,6 +22,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsCustomOverlay
 
+# SettingsProvider Customisation
+PRODUCT_PACKAGES += \
+    SettingsProviderOverlay
+
+# SettingsLib Customisation
+PRODUCT_PACKAGES += \
+    SettingsLibOverlay
+
 # Shell Customisation
 PRODUCT_PACKAGES += \
     ShellOverlay
