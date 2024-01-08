@@ -35,10 +35,6 @@ EXCLUDE_SYSTEMUI_TESTS := true
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor
 
-# Enforce privapp-permissions whitelist
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.control_privapp_permissions=enforce
-
 # Apps
 $(call inherit-product, vendor/aosp/config/common/apps.mk)
 
