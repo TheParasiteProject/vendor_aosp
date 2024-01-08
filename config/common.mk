@@ -35,10 +35,6 @@ EXCLUDE_SYSTEMUI_TESTS := true
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor
 
-# Enforce privapp-permissions whitelist
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.control_privapp_permissions=enforce
-
 # Copy all custom init rc files
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/init/init.pixelexperience-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.pixelexperience-updater.rc \
