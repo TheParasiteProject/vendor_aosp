@@ -44,4 +44,5 @@
          show. -->
     <bool name="config_navBarAlwaysShowOnSideEdgeGesture">true</bool>
 
+    <bool name="config_navBarDefaultTransparent">true</bool>
 </resources>
