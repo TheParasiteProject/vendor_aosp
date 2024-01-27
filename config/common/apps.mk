@@ -45,3 +45,6 @@ endif
 
 # Parasite Prebuilts
 $(call inherit-product-if-exists, vendor/parasite-prebuilts/config.mk)
+
+# Microsoft
+$(call inherit-product-if-exists, vendor/microsoft/packages.mk)
