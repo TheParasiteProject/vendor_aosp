@@ -20,7 +20,6 @@ PRODUCT_SYSTEM_PROPERTIES += \
 else
 # Enable ADB authentication
 PRODUCT_SYSTEM_PROPERTIES += \
-    ro.adb.secure=1 \
     persist.sys.usb.config=none
 
 # Disable extra StrictMode features on all non-engineering builds
