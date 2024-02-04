@@ -4,6 +4,7 @@ PRODUCT_PACKAGES += \
     bash \
     bzip2 \
     curl \
+    htop \
     gdbserver \
     lib7z \
     libsepol \
