@@ -8,5 +8,5 @@ prebuilt_etc {
     name: "init.openssh.rc",
     src: "etc/init/init.openssh.rc",
     sub_dir: "init",
-    system_ext_specific: true,
+    product_specific: true,
 }

@@ -4,8 +4,9 @@ PRODUCT_PACKAGES += \
     bash \
     bzip2 \
     curl \
-    htop \
     gdbserver \
+    getcap \
+    htop \
     lib7z \
     libsepol \
     micro_bench \
@@ -14,6 +15,7 @@ PRODUCT_PACKAGES += \
     oprofiled \
     pigz \
     powertop \
+    setcap \
     sqlite3 \
     strace \
     tune2fs \
@@ -22,6 +24,11 @@ PRODUCT_PACKAGES += \
     vim \
     wget \
     zip
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/bin/curl \
+    system/bin/getcap \
+    system/bin/setcap
 
 # Filesystems tools
 PRODUCT_PACKAGES += \
@@ -67,6 +74,10 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PACKAGES += \
     procmem \
     procrank
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/bin/procmem \
+    system/bin/procrank
 endif
 
 # Extra cmdline tools
