@@ -24,5 +24,10 @@
         <item>split_shade_subpixel_optimization=true</item>
         <item>enable_new_privacy_dialog=true</item>
         <item>color_fidelity=true</item>
+        <item>compose_qs_footer_actions=true</item>
+        <item>compose_people_space=true</item>
+        <item>enable_clock_keyguard_presentation=true</item>
+        <item>improved_hun_animations=true</item>
+        <item>clipboard_shared_transitions=true</item>
     </string-array>
 </resources>
