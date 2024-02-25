@@ -150,7 +150,3 @@ else
 SOONG_CONFIG_customQcomVars_qcom_display_headers_namespace := $(QCOM_SOONG_NAMESPACE)/display
 endif
 SOONG_CONFIG_customQcomVars_qti_vibrator_effect_lib := $(TARGET_QTI_VIBRATOR_EFFECT_LIB)
-
-ifneq ($(TARGET_USES_NQ_NFC),true)
-PRODUCT_SOONG_NAMESPACES += hardware/nxp
-endif #TARGET_USES_NQ_NFC
