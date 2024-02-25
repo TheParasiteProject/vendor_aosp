@@ -1,22 +1,24 @@
-function __print_custom_functions_help() {
+function __print_lineage_functions_help() {
 cat <<EOF
-Additional functions:
+Additional LineageOS functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
-- pixelgerrit:     A Git wrapper that fetches/pushes patch from/to PixelExperience Gerrit Review.
-- pixelrebase:     Rebase a Gerrit change and push it again.
+- lineagegerrit:   A Git wrapper that fetches/pushes patch from/to LineageOS Gerrit Review.
+- lineagerebase:   Rebase a Gerrit change and push it again.
+- lineageremote:   Add git remote for LineageOS Gerrit Review.
 - aospremote:      Add git remote for matching AOSP repository.
 - cloremote:       Add git remote for matching CodeLinaro repository.
-- githubremote:    Add git remote for PixelExperience Github.
+- githubremote:    Add git remote for LineageOS Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
 - cmka:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
-- repopick:        Utility to fetch changes from PixelExperience Gerrit.
+- repopick:        Utility to fetch changes from Gerrit.
+- sort-blobs-list: Sort proprietary-files.txt sections with LC_ALL=C.
 - installboot:     Installs a boot.img to the connected device.
 - installrecovery: Installs a recovery.img to the connected device.
 EOF
@@ -76,12 +78,12 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the model name
+            # This is probably just the Lineage model name
             if [ -z "$variant" ]; then
                 variant="userdebug"
             fi
 
-            lunch aosp_$target-$variant
+            lunch lineage_$target-$variant
         fi
     fi
     return $?
@@ -92,7 +94,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/PixelExperience-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/lineage-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -100,13 +102,13 @@ function eat()
         echo "Waiting for device..."
         adb wait-for-device-recovery
         echo "Found device"
-        if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD"); then
+        if (adb shell getprop ro.lineage.device | grep -q "$LINEAGE_BUILD"); then
             echo "Rebooting to sideload for install"
             adb reboot sideload-auto-reboot
             adb wait-for-sideload
             adb sideload $ZIPPATH
         else
-            echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+            echo "The connected device does not appear to be $LINEAGE_BUILD, run away!"
         fi
         return $?
     else
@@ -230,6 +232,45 @@ function dddclient()
    fi
 }
 
+function lineageremote()
+{
+    if ! git rev-parse --git-dir &> /dev/null
+    then
+        echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
+        return 1
+    fi
+    git remote rm lineage 2> /dev/null
+    local REMOTE=$(git config --get remote.github.projectname)
+    local LINEAGE="true"
+    if [ -z "$REMOTE" ]
+    then
+        REMOTE=$(git config --get remote.aosp.projectname)
+        LINEAGE="false"
+    fi
+    if [ -z "$REMOTE" ]
+    then
+        REMOTE=$(git config --get remote.clo.projectname)
+        LINEAGE="false"
+    fi
+
+    if [ $LINEAGE = "false" ]
+    then
+        local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
+        local PFX="LineageOS/"
+    else
+        local PROJECT=$REMOTE
+    fi
+
+    local LINEAGE_USER=$(git config --get review.review.lineageos.org.username)
+    if [ -z "$LINEAGE_USER" ]
+    then
+        git remote add lineage ssh://review.lineageos.org:29418/$PFX$PROJECT
+    else
+        git remote add lineage ssh://$LINEAGE_USER@review.lineageos.org:29418/$PFX$PROJECT
+    fi
+    echo "Remote 'lineage' created"
+}
+
 function aospremote()
 {
     if ! git rev-parse --git-dir &> /dev/null
@@ -238,17 +279,23 @@ function aospremote()
         return 1
     fi
     git remote rm aosp 2> /dev/null
-    local PROJECT=$(pwd -P | sed -e "s#$ANDROID_BUILD_TOP\/##; s#-caf.*##; s#\/default##")
-    # Google moved the repo location in Oreo
-    if [ $PROJECT = "build/make" ]
-    then
-        PROJECT="build"
+
+    if [ -f ".gitupstream" ]; then
+        local REMOTE=$(cat .gitupstream | cut -d ' ' -f 1)
+        git remote add aosp ${REMOTE}
+    else
+        local PROJECT=$(pwd -P | sed -e "s#$ANDROID_BUILD_TOP\/##; s#-caf.*##; s#\/default##")
+        # Google moved the repo location in Oreo
+        if [ $PROJECT = "build/make" ]
+        then
+            PROJECT="build"
+        fi
+        if (echo $PROJECT | grep -qv "^device")
+        then
+            local PFX="platform/"
+        fi
+        git remote add aosp https://android.googlesource.com/$PFX$PROJECT
     fi
-    if (echo $PROJECT | grep -qv "^device")
-    then
-        local PFX="platform/"
-    fi
-    git remote add aosp https://android.googlesource.com/$PFX$PROJECT
     echo "Remote 'aosp' created"
 }
 
@@ -292,21 +339,22 @@ function githubremote()
         return 1
     fi
     git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.pixel-plus.projectname)
+    local REMOTE=$(git config --get remote.aosp.projectname)
+
     if [ -z "$REMOTE" ]
     then
-        local REMOTE=$(git config --get remote.pixel.projectname)
+        REMOTE=$(git config --get remote.clo.projectname)
     fi
 
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
-    git remote add github https://github.com/PixelExperience/$PROJECT
+    git remote add github https://github.com/LineageOS/$PROJECT
     echo "Remote 'github' created"
 }
 
 function installboot()
 {
-    if [ ! -e "$OUT/recovery/root/etc/recovery.fstab" ];
+    if [ ! -e "$OUT/recovery/root/system/etc/recovery.fstab" ];
     then
         echo "No recovery.fstab found. Build recovery first."
         return 1
@@ -316,12 +364,12 @@ function installboot()
         echo "No boot.img found. Run make bootimage first."
         return 1
     fi
-    PARTITION=`grep "^\/boot" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+    PARTITION=`grep "^\/boot" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
     if [ -z "$PARTITION" ];
     then
         # Try for RECOVERY_FSTAB_VERSION = 2
-        PARTITION=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $1'}`
-        PARTITION_TYPE=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+        PARTITION=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $1'}`
+        PARTITION_TYPE=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
         if [ -z "$PARTITION" ];
         then
             echo "Unable to determine boot partition."
@@ -331,20 +379,20 @@ function installboot()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop ro.lineage.device | grep -q "$LINEAGE_BUILD");
     then
         adb push $OUT/boot.img /cache/
         adb shell dd if=/cache/boot.img of=$PARTITION
         adb shell rm -rf /cache/boot.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $LINEAGE_BUILD, run away!"
     fi
 }
 
 function installrecovery()
 {
-    if [ ! -e "$OUT/recovery/root/etc/recovery.fstab" ];
+    if [ ! -e "$OUT/recovery/root/system/etc/recovery.fstab" ];
     then
         echo "No recovery.fstab found. Build recovery first."
         return 1
@@ -354,12 +402,12 @@ function installrecovery()
         echo "No recovery.img found. Run make recoveryimage first."
         return 1
     fi
-    PARTITION=`grep "^\/recovery" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+    PARTITION=`grep "^\/recovery" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
     if [ -z "$PARTITION" ];
     then
         # Try for RECOVERY_FSTAB_VERSION = 2
-        PARTITION=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $1'}`
-        PARTITION_TYPE=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+        PARTITION=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $1'}`
+        PARTITION_TYPE=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
         if [ -z "$PARTITION" ];
         then
             echo "Unable to determine recovery partition."
@@ -369,34 +417,40 @@ function installrecovery()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop ro.lineage.device | grep -q "$LINEAGE_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         adb shell rm -rf /cache/recovery.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $LINEAGE_BUILD, run away!"
     fi
 }
 
-function __detect_shell() {
-    case `ps -o command -p $$` in
-        *bash*)
-            echo bash
-            ;;
-        *zsh*)
-            echo zsh
-            ;;
-        *)
-            echo unknown
-            return 1
-            ;;
-    esac
-    return
+function makerecipe() {
+    if [ -z "$1" ]
+    then
+        echo "No branch name provided."
+        return 1
+    fi
+    cd android
+    sed -i s/'default revision=.*'/'default revision="refs\/heads\/'$1'"'/ default.xml
+    git commit -a -m "$1"
+    cd ..
+
+    repo forall -c '
+
+    if [ "$REPO_REMOTE" = "github" ]
+    then
+        pwd
+        lineageremote
+        git push lineage HEAD:refs/heads/'$1'
+    fi
+    '
 }
 
-function pixelgerrit() {
+function lineagegerrit() {
     if [ "$(basename $SHELL)" = "zsh" ]; then
         # zsh does not define FUNCNAME, derive from funcstack
         local FUNCNAME=$funcstack[1]
@@ -406,19 +460,9 @@ function pixelgerrit() {
         $FUNCNAME help
         return 1
     fi
-    local user=`git config --get review.gerrit.pixelexperience.org.username`
-    local review=`git config --get remote.pixel-plus.review`
-    local remote_branch=thirteen-plus
-    if [ -z "$review" ]
-    then
-        local review=`git config --get remote.pixel.review`
-    fi
-    local project=`git config --get remote.pixel-plus.projectname`
-    if [ -z "$project" ]
-    then
-        local project=`git config --get remote.pixel.projectname`
-        local remote_branch=thirteen
-    fi
+    local user=`git config --get review.review.lineageos.org.username`
+    local review=`git config --get remote.github.review`
+    local project=`git config --get remote.github.projectname`
     local command=$1
     shift
     case $command in
@@ -432,7 +476,7 @@ Commands:
     fetch   Just fetch the change as FETCH_HEAD
     help    Show this help, or for a specific command
     pull    Pull a change into current branch
-    push    Push HEAD or a local branch to Gerrit
+    push    Push HEAD or a local branch to Gerrit for a specific branch
 
 Any other Git commands that support refname would work as:
     git fetch URL CHANGE && git COMMAND OPTIONS FETCH_HEAD{@|^|~|:}ARG -- ARGS
@@ -452,7 +496,7 @@ EOF
             case $1 in
                 __cmg_*) echo "For internal use only." ;;
                 changes|for)
-                    if [ "$FUNCNAME" = "pixelgerrit" ]; then
+                    if [ "$FUNCNAME" = "lineagegerrit" ]; then
                         echo "'$FUNCNAME $1' is deprecated."
                     fi
                     ;;
@@ -470,16 +514,16 @@ will $1 patch-set 1 of change 1234
 EOF
                     ;;
                 push) cat <<EOF
-usage: $FUNCNAME push BRANCH
+usage: $FUNCNAME push [OPTIONS] [LOCAL_BRANCH:]REMOTE_BRANCH
 
 works as:
-    git push ssh://USER@DOMAIN:29418/PROJECT \\
-      HEAD:refs/for/$remote_branch
+    git push OPTIONS ssh://USER@DOMAIN:29418/PROJECT \\
+      {LOCAL_BRANCH|HEAD}:refs/for/REMOTE_BRANCH
 
 Example:
-    $FUNCNAME push '$remote_branch'
-will push HEAD to branch '$remote_branch'.
-'$remote_branch' is the default branch.
+    $FUNCNAME push fix6789:gingerbread
+will push local branch 'fix6789' to Gerrit for branch 'gingerbread'.
+HEAD will be pushed from local if omitted.
 EOF
                     ;;
                 *)
@@ -523,21 +567,29 @@ EOF
                 $($FUNCNAME __cmg_get_ref $change) || return 1
             ;;
         push)
+            $FUNCNAME __cmg_err_no_arg $command $# help && return 1
             $FUNCNAME __cmg_err_not_repo && return 1
             if [ -z "$user" ]; then
                 echo >&2 "Gerrit username not found."
                 return 1
             fi
-            local local_branch=HEAD
-            if [ -n "$1" ]; then
-                remote_branch=$1
-            fi
+            local local_branch remote_branch
+            case $1 in
+                *:*)
+                    local_branch=${1%:*}
+                    remote_branch=${1##*:}
+                    ;;
+                *)
+                    local_branch=HEAD
+                    remote_branch=$1
+                    ;;
+            esac
             shift
             git push $@ ssh://$user@$review:29418/$project \
                 ${local_branch}:refs/for/$remote_branch || return 1
             ;;
         changes|for)
-            if [ "$FUNCNAME" = "pixelgerrit" ]; then
+            if [ "$FUNCNAME" = "lineagegerrit" ]; then
                 echo >&2 "'$FUNCNAME $command' is deprecated."
             fi
             ;;
@@ -636,15 +688,15 @@ EOF
     esac
 }
 
-function pixelrebase() {
+function lineagerebase() {
     local repo=$1
     local refs=$2
     local pwd="$(pwd)"
     local dir="$(gettop)/$repo"
 
     if [ -z $repo ] || [ -z $refs ]; then
-        echo "PixelExperience Gerrit Rebase Usage: "
-        echo "      pixelrebase <path to project> <patch IDs on Gerrit>"
+        echo "LineageOS Gerrit Rebase Usage: "
+        echo "      lineagerebase <path to project> <patch IDs on Gerrit>"
         echo "      The patch IDs appear on the Gerrit commands that are offered."
         echo "      They consist on a series of numbers and slashes, after the text"
         echo "      refs/changes. For example, the ID in the following command is 26/8126/2"
@@ -659,17 +711,13 @@ function pixelrebase() {
         return
     fi
     cd $dir
-    repo=$(git config --get remote.pixel-plus.projectname)
-    if [ -z "$repo" ]
-    then
-        repo=$(git config --get remote.pixel.projectname)
-    fi
+    repo=$(cat .git/config  | grep git://github.com | awk '{ print $NF }' | sed s#git://github.com/##g)
     echo "Starting branch..."
     repo start tmprebase .
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "http://gerrit.pixelexperience.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "http://review.lineageos.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
@@ -689,7 +737,7 @@ function cmka() {
     if [ ! -z "$1" ]; then
         for i in "$@"; do
             case $i in
-                bacon|chips|otapackage|systemimage)
+                bacon|otapackage|systemimage)
                     mka installclean
                     mka $i
                     ;;
@@ -753,7 +801,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop ro.lineage.device | grep -q "$LINEAGE_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -872,7 +920,7 @@ EOF
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $LINEAGE_BUILD, run away!"
     fi
 }
 
@@ -885,14 +933,19 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/aosp/build/tools/repopick.py $@
+    $T/vendor/lineage/build/tools/repopick.py $@
+}
+
+function sort-blobs-list() {
+    T=$(gettop)
+    $T/tools/extract-utils/sort-blobs-list.py $@
 }
 
 function fixup_common_out_dir() {
     common_out_dir=$(get_build_var OUT_DIR)/target/common
     target_device=$(get_build_var TARGET_DEVICE)
     common_target_out=common-${target_device}
-    if [ ! -z $FIXUP_COMMON_OUT ]; then
+    if [ ! -z $LINEAGE_FIXUP_COMMON_OUT ]; then
         if [ -d ${common_out_dir} ] && [ ! -L ${common_out_dir} ]; then
             mv ${common_out_dir} ${common_out_dir}-${target_device}
             ln -s ${common_target_out} ${common_out_dir}

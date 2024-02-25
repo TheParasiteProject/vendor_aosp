@@ -1,32 +1,25 @@
 # Build fingerprint
-ifeq ($(BUILD_FINGERPRINT),)
-BUILD_NUMBER_CUSTOM := $(shell date -u +%H%M)
-CUSTOM_DEVICE ?= $(TARGET_DEVICE)
-BUILD_SIGNATURE_KEYS := release-keys
-BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(CUSTOM_DEVICE)/$(CUSTOM_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_CUSTOM):$(TARGET_BUILD_VARIANT)/$(BUILD_SIGNATURE_KEYS)
-endif
-ADDITIONAL_SYSTEM_PROPERTIES  += \
+ifneq ($(BUILD_FINGERPRINT),)
+ADDITIONAL_SYSTEM_PROPERTIES += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
-
-# AOSP recovery flashing
-ifeq ($(TARGET_USES_AOSP_RECOVERY),true)
-ADDITIONAL_SYSTEM_PROPERTIES  += \
-    persist.sys.recovery_update=true
 endif
 
-# Compress AOSP recovery, for our infra
-ifeq ($(TARGET_USES_TAR_COMPRESSED_RECOVERY),true)
-ADDITIONAL_SYSTEM_PROPERTIES  += \
-    org.pixelexperience.tar_compressed_recovery=true
-endif
+# LineageOS System Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.version=$(LINEAGE_VERSION) \
+    ro.lineage.releasetype=$(LINEAGE_BUILDTYPE) \
+    ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
+    ro.modversion=$(LINEAGE_VERSION) \
+    ro.lineagelegal.url=https://lineageos.org/legal
 
-# Custom security patch
-CUSTOM_SECURITY_PATCH := 2022-08-05
+# LineageOS Platform Display Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.display.version=$(LINEAGE_DISPLAY_VERSION)
 
-# Versioning props
-ADDITIONAL_SYSTEM_PROPERTIES  += \
-    org.pixelexperience.version=$(CUSTOM_VERSION_PROP) \
-    org.pixelexperience.version.display=$(CUSTOM_VERSION) \
-    org.pixelexperience.build_date=$(CUSTOM_BUILD_DATE) \
-    org.pixelexperience.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \
-    org.pixelexperience.build_security_patch=$(CUSTOM_SECURITY_PATCH)
+# LineageOS Platform SDK Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.build.version.plat.sdk=$(LINEAGE_PLATFORM_SDK_VERSION)
+
+# LineageOS Platform Internal Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.build.version.plat.rev=$(LINEAGE_PLATFORM_REV)
