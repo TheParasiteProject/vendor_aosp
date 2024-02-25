@@ -43,9 +43,9 @@
 #                                          For example, for ARM devices,
 #                                          use zImage-dtb instead of zImage.
 #
-#   BOARD_DTB_CFG                      = Path to a mkdtboimg.py config file for dtb.img
+#   BOARD_DTB_CFG                      = Path to a mkdtboimg config file for dtb.img
 #
-#   BOARD_DTBO_CFG                     = Path to a mkdtboimg.py config file
+#   BOARD_DTBO_CFG                     = Path to a mkdtboimg config file
 #
 #   BOARD_CUSTOM_DTBIMG_MK             = Path to a custom dtbimage makefile
 #
@@ -67,6 +67,10 @@
 #                                          modules in system instead of vendor
 #   NEED_KERNEL_MODULE_VENDOR_OVERLAY  = Optional, if true, install kernel
 #                                          modules in vendor_overlay instead of vendor
+#
+#   TARGET_FORCE_PREBUILT_KERNEL       = Optional, use TARGET_PREBUILT_KERNEL even if
+#                                          kernel sources are present
+#
 #   TARGET_MERGE_DTBS_WILDCARD         = Optional, limits the .dtb files used to generate the
 #                                          final DTB image when using QCOM's merge_dtbs script.
 

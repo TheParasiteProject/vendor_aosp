@@ -306,7 +306,7 @@ function githubremote()
 
 function installboot()
 {
-    if [ ! -e "$OUT/recovery/root/etc/recovery.fstab" ];
+    if [ ! -e "$OUT/recovery/root/system/etc/recovery.fstab" ];
     then
         echo "No recovery.fstab found. Build recovery first."
         return 1
@@ -316,12 +316,12 @@ function installboot()
         echo "No boot.img found. Run make bootimage first."
         return 1
     fi
-    PARTITION=`grep "^\/boot" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+    PARTITION=`grep "^\/boot" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
     if [ -z "$PARTITION" ];
     then
         # Try for RECOVERY_FSTAB_VERSION = 2
-        PARTITION=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $1'}`
-        PARTITION_TYPE=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+        PARTITION=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $1'}`
+        PARTITION_TYPE=`grep "[[:space:]]\/boot[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
         if [ -z "$PARTITION" ];
         then
             echo "Unable to determine boot partition."
@@ -344,7 +344,7 @@ function installboot()
 
 function installrecovery()
 {
-    if [ ! -e "$OUT/recovery/root/etc/recovery.fstab" ];
+    if [ ! -e "$OUT/recovery/root/system/etc/recovery.fstab" ];
     then
         echo "No recovery.fstab found. Build recovery first."
         return 1
@@ -354,12 +354,12 @@ function installrecovery()
         echo "No recovery.img found. Run make recoveryimage first."
         return 1
     fi
-    PARTITION=`grep "^\/recovery" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+    PARTITION=`grep "^\/recovery" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
     if [ -z "$PARTITION" ];
     then
         # Try for RECOVERY_FSTAB_VERSION = 2
-        PARTITION=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $1'}`
-        PARTITION_TYPE=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/etc/recovery.fstab | awk {'print $3'}`
+        PARTITION=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $1'}`
+        PARTITION_TYPE=`grep "[[:space:]]\/recovery[[:space:]]" $OUT/recovery/root/system/etc/recovery.fstab | awk {'print $3'}`
         if [ -z "$PARTITION" ];
         then
             echo "Unable to determine recovery partition."
@@ -886,6 +886,11 @@ alias cmkap='dopush cmka'
 function repopick() {
     T=$(gettop)
     $T/vendor/aosp/build/tools/repopick.py $@
+}
+
+function sort-blobs-list() {
+    T=$(gettop)
+    $T/tools/extract-utils/sort-blobs-list.py $@
 }
 
 function fixup_common_out_dir() {

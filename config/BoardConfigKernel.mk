@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2023 The LineageOS Project
+# Copyright (C) 2018-2024 The LineageOS Project
 #           (C) 2018-2023 The PixelExperience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,7 +76,9 @@ TARGET_KERNEL_VERSION ?= $(shell echo $(KERNEL_VERSION)"."$(KERNEL_PATCHLEVEL))
 
 # 5.10+ can fully compile without GCC by default
 ifneq ($(KERNEL_VERSION),)
-    ifeq ($(shell expr $(KERNEL_VERSION) \>= 5), 1)
+    ifeq ($(shell expr $(KERNEL_VERSION) \>= 6), 1)
+        TARGET_KERNEL_NO_GCC ?= true
+    else ifeq ($(shell expr $(KERNEL_VERSION) \>= 5), 1)
         ifeq ($(shell expr $(KERNEL_PATCHLEVEL) \>= 10), 1)
             TARGET_KERNEL_NO_GCC ?= true
         endif
@@ -165,7 +167,7 @@ ifneq ($(KERNEL_NO_GCC), true)
         endif
     endif
 
-    KERNEL_MAKE_FLAGS += HOSTCFLAGS="-I/usr/include -I/usr/include/x86_64-linux-gnu" HOSTLDFLAGS="-L/usr/lib/x86_64-linux-gnu -L/usr/lib64 -fuse-ld=lld"
+    KERNEL_MAKE_FLAGS += CPATH="/usr/include:/usr/include/x86_64-linux-gnu" HOSTLDFLAGS="-L/usr/lib/x86_64-linux-gnu -L/usr/lib64 -fuse-ld=lld"
 
     ifeq ($(KERNEL_ARCH),arm64)
         # Add 32-bit GCC to PATH so that arm-linux-androidkernel-as is available for CONFIG_COMPAT_VDSO
