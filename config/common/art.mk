@@ -15,9 +15,7 @@ SYSTEMUI_OPTIMIZE_JAVA ?= true
 
 # Disable debug infos
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    dalvik.vm.debug.alloc=0 \
-    dalvik.vm.dex2oat-minidebuginfo=false \
-    dalvik.vm.minidebuginfo=false
+    dalvik.vm.dex2oat-minidebuginfo=false
 
 # Dex pre-opt
 WITH_DEXPREOPT := true
@@ -36,18 +34,16 @@ PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 # Dexopt boot types
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     pm.dexopt.first-boot=verify \
-    pm.dexopt.boot=verify
+    pm.dexopt.boot-after-ota=verify \
+    pm.dexopt.boot-after-mainline-update=verify
 
 # Dexopt filters
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     dalvik.vm.dex2oat-filter=speed \
     dalvik.vm.image-dex2oat-filter=speed \
     dalvik.vm.systemuicompilerfilter=speed \
-    pm.dexopt.first-use=speed-profile \
-    pm.dexopt.secondary=speed-profile \
-    pm.dexopt.install=speed-profile \
     pm.dexopt.bg-dexopt=speed-profile \
-    pm.dexopt.ab-ota=speed-profile \
+    pm.dexopt.cmdline=verify \
     pm.dexopt.inactive=verify \
     pm.dexopt.shared=speed
 
@@ -58,16 +54,11 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     dalvik.vm.dex2oat-cpu-set=0,1,6,7 \
     dalvik.vm.dex2oat-threads=4 \
     dalvik.vm.image-dex2oat-cpu-set=0,1,6,7 \
-    dalvik.vm.image-dex2oat-threads=4 \
-    ro.sys.fw.dex2oat_thread_count=4
+    dalvik.vm.image-dex2oat-threads=4
 
 # Enable 64Bit dex2oat
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     dalvik.vm.dex2oat64.enabled=true
-
-# Whitelist GMS from dex2oat
-PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    ro.dex2oat_white_list=com.google.android.gms
 
 # QTI Specific dex config
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
