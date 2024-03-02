@@ -59,7 +59,3 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 # Enable 64Bit dex2oat
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     dalvik.vm.dex2oat64.enabled=true
-
-# QTI Specific dex config
-PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    ro.vendor.qti.am.reschedule_service=true
