@@ -21,3 +21,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Storage manager
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.storage_manager.enabled=true
+
+# PixelPropsUtils
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.sys.pihooks.enable?=true
