@@ -26,14 +26,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsProviderOverlay
 
-# SettingsLib Customisation
-PRODUCT_PACKAGES += \
-    SettingsLibOverlay
-
-# Shell Customisation
-PRODUCT_PACKAGES += \
-    ShellOverlay
-
 # Themes
 PRODUCT_PACKAGES += \
     AndroidBlackThemeOverlay
