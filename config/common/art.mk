@@ -8,6 +8,13 @@ ART_BUILD_HOST_NDEBUG := false
 ART_BUILD_HOST_DEBUG := false
 USE_DEX2OAT_DEBUG := false
 
+# Dex preopt
+ifeq ($(TARGET_INCLUDE_PIXEL_FRAMEWORKS),false)
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Settings \
+    SystemUI
+endif
+
 # Enable whole-program R8 Java optimizations for SystemUI and system_server,
 # but also allow explicit overriding for testing and development.
 SYSTEM_OPTIMIZE_JAVA ?= true
