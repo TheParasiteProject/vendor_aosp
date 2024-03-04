@@ -46,9 +46,3 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
 endif
-
-# Parasite Prebuilts
-$(call inherit-product-if-exists, vendor/parasite-prebuilts/config.mk)
-
-# Microsoft
-$(call inherit-product-if-exists, vendor/microsoft/packages.mk)
