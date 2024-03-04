@@ -12,16 +12,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.control_privapp_permissions=enforce
 
-ifeq ($(TARGET_BUILD_VARIANT),eng)
-# Disable ADB authentication
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.adb.secure=0 \
-    persist.sys.usb.config=adb
-else
-# Enable ADB authentication
-PRODUCT_SYSTEM_PROPERTIES += \
-    persist.sys.usb.config=none
-
+ifneq ($(TARGET_BUILD_VARIANT),eng)
 # Disable extra StrictMode features on all non-engineering builds
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.strictmode.disable=true
