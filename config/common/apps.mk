@@ -12,10 +12,6 @@ PRODUCT_PACKAGES += \
     Aperture
 endif
 
-# GameSpace
-PRODUCT_PACKAGES += \
-    GameSpace
-
 # SystemUI Flag configuration
 PRODUCT_PACKAGES += \
     SystemUIFlagFlipper
