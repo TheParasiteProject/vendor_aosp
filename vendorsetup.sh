@@ -1,5 +1,7 @@
 # Shebang is intentionally missing - do not run as a script
 
+if [ -z $VENDOR_AOSP_SETUP_DONE ]; then
+
 # ABI compatibility checks fail for several reasons:
 #   - The update to Clang 12 causes some changes, but no breakage has been
 #     observed in practice.
@@ -13,3 +15,6 @@
 #
 # For now, just skip the ABI checks to fix build errors.
 export SKIP_ABI_CHECKS=true
+
+export VENDOR_AOSP_SETUP_DONE=true
+fi
