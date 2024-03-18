@@ -13,3 +13,10 @@
 #
 # For now, just skip the ABI checks to fix build errors.
 export SKIP_ABI_CHECKS=true
+
+# Patch hardware/qcom-caf/wlan
+if [ -d "hardware/qcom-caf/wlan/qcwcn/wifi_hal/" ]; then
+    cd hardware/qcom-caf/wlan/qcwcn/wifi_hal
+    sed -i 's/WIFI_VOIP_MODE_ON/WIFI_VOIP_MODE_VOICE/g' wificonfig.cpp
+    cd ../../../../../
+fi
