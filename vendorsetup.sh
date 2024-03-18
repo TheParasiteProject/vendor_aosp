@@ -1,5 +1,7 @@
 # Shebang is intentionally missing - do not run as a script
 
+if [ -z $VENDOR_AOSP_SETUP_DONE ]; then
+
 # ABI compatibility checks fail for several reasons:
 #   - The update to Clang 12 causes some changes, but no breakage has been
 #     observed in practice.
@@ -19,4 +21,7 @@ if [ -d "hardware/qcom-caf/wlan/qcwcn/wifi_hal/" ]; then
     cd hardware/qcom-caf/wlan/qcwcn/wifi_hal
     sed -i 's/WIFI_VOIP_MODE_ON/WIFI_VOIP_MODE_VOICE/g' wificonfig.cpp
     cd ../../../../../
+fi
+
+export VENDOR_AOSP_SETUP_DONE=true
 fi
