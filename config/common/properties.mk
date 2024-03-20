@@ -2,10 +2,6 @@
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.fflag.override.settings_app_locale_opt_in_enabled=false
 
-# Enable lockscreen live wallpaper
-PRODUCT_SYSTEM_PROPERTIES += \
-    persist.wm.debug.lockscreen_live_wallpaper=true
-
 # Enable SystemUIDialog volume panel
 PRODUCT_SYSTEM_PROPERTIES += \
     sys.fflag.override.settings_volume_panel_in_systemui=true
