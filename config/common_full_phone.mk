@@ -2,9 +2,11 @@
 
 IS_PHONE := true
 
+ifneq ($(TARGET_REQUIRES_APN_CONF),false)
 # World APN list
 PRODUCT_PACKAGES += \
     apns-conf.xml
+endif
 
 # Telephony packages
 PRODUCT_PACKAGES += \
