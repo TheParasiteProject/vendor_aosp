@@ -40,7 +40,7 @@ $(call inherit-product, vendor/aosp/config/common/configs.mk)
 $(call inherit-product, vendor/aosp/config/common/fonts.mk)
 
 # GMS
-$(call inherit-product, vendor/gms/products/gms.mk)
+$(call inherit-product, vendor/google/gms/products/gms.mk)
 
 # Languages
 $(call inherit-product, vendor/aosp/config/common/languages.mk)
