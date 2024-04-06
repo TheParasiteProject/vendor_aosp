@@ -292,15 +292,10 @@ function githubremote()
         return 1
     fi
     git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.pixel-plus.projectname)
-    if [ -z "$REMOTE" ]
-    then
-        local REMOTE=$(git config --get remote.pixel.projectname)
-    fi
-
+    local REMOTE=$(git config --get remote.parasite.projectname)
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
-    git remote add github https://github.com/PixelExperience/$PROJECT
+    git remote add github https://github.com/TheParasiteProject/$PROJECT
     echo "Remote 'github' created"
 }
 
