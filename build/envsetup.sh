@@ -5,18 +5,20 @@ Additional functions:
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
-- pixelgerrit:     A Git wrapper that fetches/pushes patch from/to PixelExperience Gerrit Review.
-- pixelrebase:     Rebase a Gerrit change and push it again.
+- lineagegerrit:   A Git wrapper that fetches/pushes patch from/to LineageOS Gerrit Review.
+- lineagerebase:   Rebase a Gerrit change and push it again.
+- lineageremote:   Add git remote for LineageOS Gerrit Review.
 - aospremote:      Add git remote for matching AOSP repository.
 - cloremote:       Add git remote for matching CodeLinaro repository.
-- githubremote:    Add git remote for PixelExperience Github.
+- githubremote:    Add git remote for TheParasiteProject Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
 - cmka:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
-- repopick:        Utility to fetch changes from PixelExperience Gerrit.
+- repopick:        Utility to fetch changes from Gerrit.
+- sort-blobs-list: Sort proprietary-files.txt sections with LC_ALL=C.
 - installboot:     Installs a boot.img to the connected device.
 - installrecovery: Installs a recovery.img to the connected device.
 EOF
@@ -92,7 +94,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/PixelExperience-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/TheParasiteProject-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -228,6 +230,45 @@ function dddclient()
   else
        echo "Unable to determine build system output dir."
    fi
+}
+
+function lineageremote()
+{
+    if ! git rev-parse --git-dir &> /dev/null
+    then
+        echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
+        return 1
+    fi
+    git remote rm lineage 2> /dev/null
+    local REMOTE=$(git config --get remote.github.projectname)
+    local LINEAGE="true"
+    if [ -z "$REMOTE" ]
+    then
+        REMOTE=$(git config --get remote.aosp.projectname)
+        LINEAGE="false"
+    fi
+    if [ -z "$REMOTE" ]
+    then
+        REMOTE=$(git config --get remote.clo.projectname)
+        LINEAGE="false"
+    fi
+
+    if [ $LINEAGE = "false" ]
+    then
+        local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
+        local PFX="LineageOS/"
+    else
+        local PROJECT=$REMOTE
+    fi
+
+    local LINEAGE_USER=$(git config --get review.review.lineageos.org.username)
+    if [ -z "$LINEAGE_USER" ]
+    then
+        git remote add lineage ssh://review.lineageos.org:29418/$PFX$PROJECT
+    else
+        git remote add lineage ssh://$LINEAGE_USER@review.lineageos.org:29418/$PFX$PROJECT
+    fi
+    echo "Remote 'lineage' created"
 }
 
 function aospremote()
@@ -391,7 +432,7 @@ function __detect_shell() {
     return
 }
 
-function pixelgerrit() {
+function lineagegerrit() {
     if [ "$(basename $SHELL)" = "zsh" ]; then
         # zsh does not define FUNCNAME, derive from funcstack
         local FUNCNAME=$funcstack[1]
@@ -401,19 +442,9 @@ function pixelgerrit() {
         $FUNCNAME help
         return 1
     fi
-    local user=`git config --get review.gerrit.pixelexperience.org.username`
-    local review=`git config --get remote.pixel-plus.review`
-    local remote_branch=thirteen-plus
-    if [ -z "$review" ]
-    then
-        local review=`git config --get remote.pixel.review`
-    fi
-    local project=`git config --get remote.pixel-plus.projectname`
-    if [ -z "$project" ]
-    then
-        local project=`git config --get remote.pixel.projectname`
-        local remote_branch=thirteen
-    fi
+    local user=`git config --get review.review.lineageos.org.username`
+    local review=`git config --get remote.github.review`
+    local project=`git config --get remote.github.projectname`
     local command=$1
     shift
     case $command in
@@ -427,7 +458,7 @@ Commands:
     fetch   Just fetch the change as FETCH_HEAD
     help    Show this help, or for a specific command
     pull    Pull a change into current branch
-    push    Push HEAD or a local branch to Gerrit
+    push    Push HEAD or a local branch to Gerrit for a specific branch
 
 Any other Git commands that support refname would work as:
     git fetch URL CHANGE && git COMMAND OPTIONS FETCH_HEAD{@|^|~|:}ARG -- ARGS
@@ -447,7 +478,7 @@ EOF
             case $1 in
                 __cmg_*) echo "For internal use only." ;;
                 changes|for)
-                    if [ "$FUNCNAME" = "pixelgerrit" ]; then
+                    if [ "$FUNCNAME" = "lineagegerrit" ]; then
                         echo "'$FUNCNAME $1' is deprecated."
                     fi
                     ;;
@@ -465,16 +496,16 @@ will $1 patch-set 1 of change 1234
 EOF
                     ;;
                 push) cat <<EOF
-usage: $FUNCNAME push BRANCH
+usage: $FUNCNAME push [OPTIONS] [LOCAL_BRANCH:]REMOTE_BRANCH
 
 works as:
-    git push ssh://USER@DOMAIN:29418/PROJECT \\
-      HEAD:refs/for/$remote_branch
+    git push OPTIONS ssh://USER@DOMAIN:29418/PROJECT \\
+      {LOCAL_BRANCH|HEAD}:refs/for/REMOTE_BRANCH
 
 Example:
-    $FUNCNAME push '$remote_branch'
-will push HEAD to branch '$remote_branch'.
-'$remote_branch' is the default branch.
+    $FUNCNAME push fix6789:gingerbread
+will push local branch 'fix6789' to Gerrit for branch 'gingerbread'.
+HEAD will be pushed from local if omitted.
 EOF
                     ;;
                 *)
@@ -518,21 +549,29 @@ EOF
                 $($FUNCNAME __cmg_get_ref $change) || return 1
             ;;
         push)
+            $FUNCNAME __cmg_err_no_arg $command $# help && return 1
             $FUNCNAME __cmg_err_not_repo && return 1
             if [ -z "$user" ]; then
                 echo >&2 "Gerrit username not found."
                 return 1
             fi
-            local local_branch=HEAD
-            if [ -n "$1" ]; then
+            local local_branch remote_branch
+            case $1 in
+                *:*)
+                    local_branch=${1%:*}
+                    remote_branch=${1##*:}
+                    ;;
+                *)
+                    local_branch=HEAD
                 remote_branch=$1
-            fi
+                    ;;
+            esac
             shift
             git push $@ ssh://$user@$review:29418/$project \
                 ${local_branch}:refs/for/$remote_branch || return 1
             ;;
         changes|for)
-            if [ "$FUNCNAME" = "pixelgerrit" ]; then
+            if [ "$FUNCNAME" = "lineagegerrit" ]; then
                 echo >&2 "'$FUNCNAME $command' is deprecated."
             fi
             ;;
@@ -631,15 +670,15 @@ EOF
     esac
 }
 
-function pixelrebase() {
+function lineagerebase() {
     local repo=$1
     local refs=$2
     local pwd="$(pwd)"
     local dir="$(gettop)/$repo"
 
     if [ -z $repo ] || [ -z $refs ]; then
-        echo "PixelExperience Gerrit Rebase Usage: "
-        echo "      pixelrebase <path to project> <patch IDs on Gerrit>"
+        echo "LineageOS Gerrit Rebase Usage: "
+        echo "      lineagerebase <path to project> <patch IDs on Gerrit>"
         echo "      The patch IDs appear on the Gerrit commands that are offered."
         echo "      They consist on a series of numbers and slashes, after the text"
         echo "      refs/changes. For example, the ID in the following command is 26/8126/2"
@@ -654,17 +693,13 @@ function pixelrebase() {
         return
     fi
     cd $dir
-    repo=$(git config --get remote.pixel-plus.projectname)
-    if [ -z "$repo" ]
-    then
-        repo=$(git config --get remote.pixel.projectname)
-    fi
+    repo=$(cat .git/config  | grep git://github.com | awk '{ print $NF }' | sed s#git://github.com/##g)
     echo "Starting branch..."
     repo start tmprebase .
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "http://gerrit.pixelexperience.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "http://review.lineageos.org/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
