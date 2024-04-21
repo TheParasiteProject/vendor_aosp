@@ -1,4 +1,5 @@
 # Don't build debug for host or device
+ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 WITH_DEXPREOPT_DEBUG_INFO := false
@@ -7,6 +8,7 @@ ART_BUILD_TARGET_DEBUG := false
 ART_BUILD_HOST_NDEBUG := false
 ART_BUILD_HOST_DEBUG := false
 USE_DEX2OAT_DEBUG := false
+endif
 
 # Dex preopt
 ifeq ($(TARGET_INCLUDE_PIXEL_FRAMEWORKS),false)
@@ -21,8 +23,10 @@ SYSTEM_OPTIMIZE_JAVA ?= true
 SYSTEMUI_OPTIMIZE_JAVA ?= true
 
 # Disable debug infos
+ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=false
+endif
 
 # Dex pre-opt
 WITH_DEXPREOPT := true
