@@ -11,7 +11,7 @@ USE_DEX2OAT_DEBUG := false
 endif
 
 # Dex preopt
-ifeq ($(TARGET_INCLUDE_PIXEL_FRAMEWORKS),false)
+ifneq ($(TARGET_INCLUDE_PIXEL_FRAMEWORKS),true)
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
