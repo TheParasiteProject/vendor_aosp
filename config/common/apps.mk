@@ -24,6 +24,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     TouchGestures
 
+# Updater
+PRODUCT_PACKAGES += \
+    Updater
+
 # Face Unlock
 ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
