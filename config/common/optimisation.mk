@@ -1,3 +1,6 @@
+# Don't compile SystemUITests
+EXCLUDE_SYSTEMUI_TESTS := true
+
 # Enable Compose in SystemUI by default.
 SYSTEMUI_USE_COMPOSE ?= true
 
