@@ -15,6 +15,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
 PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=0
+PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure.recovery=0
 else
 # Enable ADB authentication
 PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=1
