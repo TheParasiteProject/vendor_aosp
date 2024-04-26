@@ -36,6 +36,12 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     debug.hwui.use_hint_manager?=true \
     debug.hwui.target_cpu_time_percent?=30
 
+# Suspend properties
+PRODUCT_PRODUCT_PROPERTIES += \
+    suspend.short_suspend_threshold_millis?=2000 \
+    suspend.max_sleep_time_millis?=40000 \
+    suspend.short_suspend_backoff_enabled?=true
+
 # Watchdog timeout loop breaker
 PRODUCT_PRODUCT_PROPERTIES += \
     framework_watchdog.fatal_window.second?=600 \
