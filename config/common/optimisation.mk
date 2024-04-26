@@ -36,6 +36,11 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     debug.hwui.use_hint_manager?=true \
     debug.hwui.target_cpu_time_percent?=30
 
+# Watchdog timeout loop breaker
+PRODUCT_PRODUCT_PROPERTIES += \
+    framework_watchdog.fatal_window.second?=600 \
+    framework_watchdog.fatal_count?=3
+
 # Zygote
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     zygote.critical_window.minute?=10
