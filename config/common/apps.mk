@@ -10,6 +10,11 @@ PRODUCT_PACKAGES += \
 ifneq ($(PRODUCT_NO_CAMERA),true)
 PRODUCT_PACKAGES += \
     Aperture
+
+PRODUCT_PACKAGES += \
+    PixelConfigOverlayAperture \
+    PixelLauncherCustomOverlayAperture \
+    SystemUICustomOverlayAperture
 endif
 
 # SystemUI Flag configuration
