@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# Exports
-
-#. $ANDROID_BUILD_TOP/vendor/aosp/tools/colors
+GREEN="\033[1;32m"
 
 export Changelog=changelog.md
 
@@ -35,3 +33,4 @@ done
 
 cp $Changelog ${OUT_DIR:-./out}/target/product/$DEVICE/
 rm $Changelog
+echo -e "${GREEN}Done generating changelog for $DEVICE"
