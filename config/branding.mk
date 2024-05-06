@@ -3,5 +3,6 @@ CUSTOM_BRAND := TheParasiteProject
 CUSTOM_BUILD_DATE := $(shell date +%Y%m%d-%H%M)
 CUSTOM_BUILD_DATE_UTC := $(shell date '+%Y-%m-%d %H:%M UTC %s')
 CUSTOM_BUILD_VERSION := $(BUILD_ID)
+CUSTOM_RELEASETYPE ?= release
 
 CUSTOM_VERSION := $(CUSTOM_BRAND)_$(CUSTOM_BUILD)-$(BUILD_ID)-$(CUSTOM_BUILD_DATE)

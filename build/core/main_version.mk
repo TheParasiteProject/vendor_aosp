@@ -15,8 +15,9 @@ ADDITIONAL_VENDOR_PROPERTIES  += \
 endif
 
 # Versioning props
-ADDITIONAL_SYSTEM_PROPERTIES  += \
+ADDITIONAL_SYSTEM_PROPERTIES += \
     ro.custom.brand=$(CUSTOM_BRAND) \
     ro.custom.build.version=$(CUSTOM_BUILD_VERSION) \
     ro.custom.build_date=$(CUSTOM_BUILD_DATE) \
-    ro.custom.build_date_utc=$(CUSTOM_BUILD_DATE_UTC)
+    ro.custom.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \
+    ro.custom.releasetype=$(CUSTOM_RELEASETYPE)
