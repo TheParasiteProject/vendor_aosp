@@ -15,6 +15,7 @@ if [[ -f $file_path ]]; then
     sha256=$(cut -d' ' -f1 "$file_path".sha256sum)
     datetime=$(grep -w "ro\\.build\\.date\\.utc=.*" "$buildprop" | cut -d= -f2)
     version=$(grep -w "ro\\.custom\\.version=.*" $buildprop | cut -d= -f2)
+    romtype=$(grep -w "ro\\.custom\\.releasetype=.*" $buildprop | cut -d= -f2)
     link="https://sourceforge.net/projects/theparasiteproject/files/${device_name}/${file_name}/download"
     cat >"$file_path".json <<JSON
 {
@@ -23,7 +24,7 @@ if [[ -f $file_path ]]; then
       "datetime": $datetime,
       "filename": "$file_name",
       "id": "$sha256",
-      "romtype": "release",
+      "romtype": "$romtype",
       "size": $file_size,
       "url": "$link",
       "version": "$version"
