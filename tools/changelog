@@ -1,6 +1,6 @@
 #!/bin/sh
 
-GREEN="\033[1;32m"
+GREEN="\033[0;32m"
 
 export Changelog=changelog.md
 

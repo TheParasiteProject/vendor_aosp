@@ -1,9 +1,7 @@
 #!/bin/bash
 # shellcheck enable=avoid-nullary-conditions
 
-GREEN="\033[1;32m"
-YELLOW="\033[1;33m"
-NC="\033[0m"
+GREEN="\033[0;32m"
 
 file_path=$1
 if [[ -f $file_path ]]; then
