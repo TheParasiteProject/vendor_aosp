@@ -32,8 +32,10 @@ PRODUCT_PACKAGES += \
     TouchGestures
 
 # Updater
+ifneq ($(TARGET_INCLUDE_UPDATER),false)
 PRODUCT_PACKAGES += \
     Updater
+endif #TARGET_INCLUDE_UPDATER
 
 # Face Unlock
 ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
