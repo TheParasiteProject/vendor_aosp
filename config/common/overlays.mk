@@ -14,6 +14,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
 
+# Navigation bar IME space overlay
+PRODUCT_PACKAGES += \
+    NavigationBarModeGesturalOverlayNarrowSpace \
+    NavigationBarModeGesturalOverlayNoSpace
+
 # SystemUI Customisation
 PRODUCT_PACKAGES += \
     SystemUICustomOverlay
