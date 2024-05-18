@@ -52,6 +52,7 @@ SOONG_CONFIG_customGlobalVars += \
     target_init_vendor_lib \
     target_inputdispatcher_skip_event_key \
     target_ld_shim_libs \
+    target_power_libperfmgr_mode_extension_lib \
     target_surfaceflinger_udfps_lib \
     target_trust_usb_control_path \
     target_trust_usb_control_enable \
@@ -117,6 +118,7 @@ TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_DEADLINE ?= false
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_TOGGLE ?= true
 TARGET_INIT_VENDOR_LIB ?= vendor_init
 TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY ?= 0
+TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB ?= libperfmgr-ext
 TARGET_QTI_VIBRATOR_EFFECT_LIB ?= libqtivibratoreffect
 TARGET_SURFACEFLINGER_UDFPS_LIB ?= surfaceflinger_udfps_lib
 TARGET_TRUST_USB_CONTROL_PATH ?= /proc/sys/kernel/deny_new_usb
@@ -131,6 +133,7 @@ SOONG_CONFIG_customGlobalVars_disable_bluetooth_le_read_buffer_size_v2 := $(TARG
 SOONG_CONFIG_customGlobalVars_disable_bluetooth_le_set_host_feature := $(TARGET_DISABLE_BLUETOOTH_LE_SET_HOST_FEATURE)
 SOONG_CONFIG_customGlobalVars_target_init_vendor_lib := $(TARGET_INIT_VENDOR_LIB)
 SOONG_CONFIG_customGlobalVars_target_ld_shim_libs := $(subst $(space),:,$(TARGET_LD_SHIM_LIBS))
+SOONG_CONFIG_customGlobalVars_target_power_libperfmgr_mode_extension_lib := $(TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB)
 SOONG_CONFIG_customGlobalVars_target_surfaceflinger_udfps_lib := $(TARGET_SURFACEFLINGER_UDFPS_LIB)
 SOONG_CONFIG_customGlobalVars_target_health_charging_control_charging_path := $(TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH)
 SOONG_CONFIG_customGlobalVars_target_health_charging_control_charging_enabled := $(TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED)
