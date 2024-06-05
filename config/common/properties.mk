@@ -21,3 +21,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # PixelPropsUtils
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.pihooks.enable?=true
+
+# Default wifi country code
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.boot.wificountrycode?=00
