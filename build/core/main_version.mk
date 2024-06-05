@@ -1,23 +1,25 @@
 # Build fingerprint
-ifeq ($(BUILD_FINGERPRINT),)
-BUILD_NUMBER_CUSTOM := $(shell date -u +%H%M)
-CUSTOM_DEVICE ?= $(TARGET_DEVICE)
-BUILD_SIGNATURE_KEYS := release-keys
-BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(CUSTOM_DEVICE)/$(CUSTOM_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_CUSTOM):$(TARGET_BUILD_VARIANT)/$(BUILD_SIGNATURE_KEYS)
-endif
-ADDITIONAL_SYSTEM_PROPERTIES  += \
-    ro.build.fingerprint=$(BUILD_FINGERPRINT)
-
-# AOSP recovery flashing
-ifeq ($(TARGET_USES_AOSP_RECOVERY),true)
-ADDITIONAL_VENDOR_PROPERTIES  += \
-    persist.vendor.recovery_update=true
-endif
-
-# Versioning props
+ifneq ($(BUILD_FINGERPRINT),)
 ADDITIONAL_SYSTEM_PROPERTIES += \
-    ro.custom.brand=$(CUSTOM_BRAND) \
-    ro.custom.build.version=$(CUSTOM_BUILD_VERSION) \
-    ro.custom.build_date=$(CUSTOM_BUILD_DATE) \
-    ro.custom.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \
-    ro.custom.releasetype=$(CUSTOM_RELEASETYPE)
+    ro.build.fingerprint=$(BUILD_FINGERPRINT)
+endif
+
+# LineageOS System Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.version=$(LINEAGE_VERSION) \
+    ro.lineage.releasetype=$(LINEAGE_BUILDTYPE) \
+    ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
+    ro.modversion=$(LINEAGE_VERSION) \
+    ro.lineagelegal.url=https://lineageos.org/legal
+
+# LineageOS Platform Display Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.display.version=$(LINEAGE_DISPLAY_VERSION)
+
+# LineageOS Platform SDK Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.build.version.plat.sdk=$(LINEAGE_PLATFORM_SDK_VERSION)
+
+# LineageOS Platform Internal Version
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.lineage.build.version.plat.rev=$(LINEAGE_PLATFORM_REV)
