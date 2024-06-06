@@ -12,3 +12,6 @@ include vendor/aosp/config/BoardConfigSoong.mk
 
 # Certification
 include vendor/certification/BoardConfig.mk
+
+# Sepolicies
+-include device/parasite/sepolicy/common/sepolicy.mk

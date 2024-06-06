@@ -58,9 +58,6 @@ $(call inherit-product, vendor/aosp/config/common/properties.mk)
 # Overlays
 $(call inherit-product, vendor/aosp/config/common/overlays.mk)
 
-# Sepolicies
-$(call inherit-product, device/parasite/sepolicy/common/sepolicy.mk)
-
 # Tools
 $(call inherit-product, vendor/aosp/config/common/tools.mk)
 
