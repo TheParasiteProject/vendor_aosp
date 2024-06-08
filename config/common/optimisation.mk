@@ -14,7 +14,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
     ro.build.shutdown_timeout?=0
 
 # EGL - Blobcache configuration
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.egl.blobcache.multifile=true \
     ro.egl.blobcache.multifile_limit=33554432
 
