@@ -19,6 +19,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.input.video_enabled=false
 
+# Disable Scudo to save RAM and use 32-bit libc variant by default
+PRODUCT_DISABLE_SCUDO ?= true
+MALLOC_SVELTE_FOR_LIBC32 ?= true
+
 # Inherit art options
 include vendor/aosp/config/common/art.mk
 
