@@ -9,6 +9,10 @@ ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
 endif
 
+# Shutdown
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.build.shutdown_timeout?=0
+
 # EGL - Blobcache configuration
 PRODUCT_VENDOR_PROPERTIES += \
     ro.egl.blobcache.multifile=true \
