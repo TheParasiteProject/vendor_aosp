@@ -44,7 +44,7 @@ $(call inherit-product, vendor/aosp/config/common/languages.mk)
 $(call inherit-product, vendor/aosp/config/common/optimisation.mk)
 
 # Parasite vendor configurations
-$(call inherit-product, vendor/parasite/common.mk)
+$(call inherit-product, vendor/parasite/common/config.mk)
 
 # Properties
 $(call inherit-product, vendor/aosp/config/common/properties.mk)

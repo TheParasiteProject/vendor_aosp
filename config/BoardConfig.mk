@@ -11,4 +11,4 @@ endif
 include vendor/aosp/config/BoardConfigSoong.mk
 
 # Parasite vendor configurations
-include vendor/parasite/BoardConfig.mk
+include vendor/parasite/common/BoardConfig.mk
