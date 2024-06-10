@@ -10,8 +10,5 @@ endif
 
 include vendor/aosp/config/BoardConfigSoong.mk
 
-# Certification
-include vendor/certification/BoardConfig.mk
-
-# Sepolicies
--include device/parasite/sepolicy/common/sepolicy.mk
+# Parasite vendor configurations
+include vendor/parasite/BoardConfig.mk

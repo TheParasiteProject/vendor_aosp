@@ -37,14 +37,8 @@ $(call inherit-product, vendor/aosp/config/common/configs.mk)
 # Fonts
 $(call inherit-product, vendor/aosp/config/common/fonts.mk)
 
-# GMS
-$(call inherit-product, vendor/google/gms/products/gms.mk)
-
 # Languages
 $(call inherit-product, vendor/aosp/config/common/languages.mk)
-
-# Microsoft
-$(call inherit-product-if-exists, vendor/microsoft/packages.mk)
 
 # Optimisation
 $(call inherit-product, vendor/aosp/config/common/optimisation.mk)
