@@ -1,9 +1,6 @@
 # Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 
-# Enable Compose in SystemUI by default.
-SYSTEMUI_USE_COMPOSE ?= true
-
 # Reduce system server verbosity.
 ifeq ($(TARGET_BUILD_VARIANT), user)
 PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
