@@ -29,3 +29,9 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Diable phantom process monitoring
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.fflag.override.settings_enable_monitor_phantom_procs?=false
+
+# Enable blur
+ifeq ($(TARGET_ENABLE_BLUR),true)
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.custom.blur.enable=true
+endif
