@@ -38,6 +38,7 @@ SOONG_CONFIG_customGlobalVars += \
     camera_override_format_from_reserved \
     gralloc_handle_has_custom_content_md_reserved_size \
     gralloc_handle_has_reserved_size \
+    gralloc_handle_has_ubwcp_format \
     needs_camera_boottime \
     target_alternative_futex_waiters \
     camera_uses_newer_hidl_override_format \
