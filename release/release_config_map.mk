@@ -14,11 +14,3 @@
 # limitations under the License.
  
 TARGET_RELEASE := $(shell grep "BUILD_ID" build/make/core/build_id.mk | tail -1 | cut -d '=' -f 2 | cut -d '.' -f 1 | tr '[:upper:]' '[:lower:]')
-
-# Get the directory for this file, and use that instead of a fixed path.
-local_dir := $(dir $(lastword $(MAKEFILE_LIST)))
-
-# Attach the flag value definitions to the various release configurations.
-$(call declare-release-config, $(TARGET_RELEASE), $(local_dir)build_config/$(TARGET_RELEASE).scl)
-
-local_dir :=
