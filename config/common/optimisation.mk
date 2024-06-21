@@ -7,7 +7,7 @@ PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
 endif
 
 # Shutdown
-PRODUCT_SYSTEM_PROPERTIES += \
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.build.shutdown_timeout?=0
 
 # EGL - Blobcache configuration
