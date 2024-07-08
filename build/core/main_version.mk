@@ -10,7 +10,7 @@ ADDITIONAL_SYSTEM_PROPERTIES  += \
 
 # AOSP recovery flashing
 ifeq ($(TARGET_USES_AOSP_RECOVERY),true)
-ADDITIONAL_VENDOR_PROPERTIES  += \
+ADDITIONAL_SYSTEM_PROPERTIES  += \
     persist.vendor.recovery_update=true
 endif
 
