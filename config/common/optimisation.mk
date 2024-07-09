@@ -1,12 +1,6 @@
 # Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 
-# Reduce system server verbosity.
-ifeq ($(TARGET_BUILD_VARIANT), user)
-PRODUCT_SYSTEM_SERVER_DEBUG_INFO := false
-PRODUCT_OTHER_JAVA_DEBUG_INFO := false
-endif
-
 # Shutdown
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.build.shutdown_timeout?=0
