@@ -23,7 +23,6 @@ endif
 # but also allow explicit overriding for testing and development.
 SYSTEM_OPTIMIZE_JAVA ?= true
 SYSTEMUI_OPTIMIZE_JAVA ?= true
-FULL_SYSTEM_OPTIMIZE_JAVA ?= true
 
 # Disable debug infos
 ifeq ($(TARGET_BUILD_VARIANT), user)
