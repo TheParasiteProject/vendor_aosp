@@ -10,3 +10,14 @@ prebuilt_etc {
     sub_dir: "init",
     product_specific: true,
 }
+
+sh_binary {
+    name: "init.cache_cleaner.sh",
+    src: "bin/init.cache_cleaner.sh",
+}
+
+prebuilt_etc {
+    name: "init.cache_cleaner.rc",
+    src: "etc/init/init.cache_cleaner.rc",
+    sub_dir: "init",
+}

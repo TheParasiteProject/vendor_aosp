@@ -83,3 +83,8 @@ endif
 # Extra cmdline tools
 PRODUCT_PACKAGES += \
     zstd
+
+# Cache clenaer
+PRODUCT_PACKAGES += \
+    init.cache_cleaner.rc \
+    init.cache_cleaner.sh
