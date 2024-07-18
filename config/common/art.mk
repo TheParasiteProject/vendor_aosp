@@ -70,4 +70,4 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 
 # Enable 64Bit dex2oat
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    dalvik.vm.dex2oat64.enabled=true
+    dalvik.vm.dex2oat64.enabled?=$(TARGET_SUPPORTS_64_BIT_APPS)
