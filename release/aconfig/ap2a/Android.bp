@@ -17,5 +17,6 @@ aconfig_value_set {
     values: [
         "aconfig-values-ap2a-com.android.server.notification.flags-all",
         "aconfig-values-ap2a-com.android.systemui.flags-all",
+        "aconfig-values-ap2a-com.android.deviceaswebcam.flags-all",
     ],
 }
