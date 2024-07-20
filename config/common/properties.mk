@@ -10,10 +10,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
-# Storage manager
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.storage_manager.enabled=true
-
 # PixelPropsUtils
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.sys.pihooks.enable?=true
