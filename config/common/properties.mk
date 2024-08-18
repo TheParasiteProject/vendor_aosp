@@ -10,10 +10,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
-# PixelPropsUtils
-PRODUCT_SYSTEM_PROPERTIES += \
-    persist.sys.pihooks.enable?=true
-
 # Default wifi country code
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.boot.wificountrycode?=00
