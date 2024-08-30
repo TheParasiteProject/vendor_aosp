@@ -25,3 +25,10 @@ flag_value {
   state: ENABLED
   permission: READ_ONLY
 }
+
+flag_value {
+  package: "com.android.systemui"
+  name: "qs_new_pipeline"
+  state: ENABLED
+  permission: READ_ONLY
+}
