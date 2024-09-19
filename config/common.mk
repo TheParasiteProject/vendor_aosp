@@ -22,6 +22,9 @@ PRODUCT_SYSTEM_PROPERTIES += ro.adb.secure=1
 
 # Disable extra StrictMode features on all non-engineering builds
 PRODUCT_SYSTEM_PROPERTIES += persist.sys.strictmode.disable=true
+
+# Disable debug and verbose logging by default
+PRODUCT_SYSTEM_PROPERTIES += log.tag=I
 endif
 
 # To prevent rebooting due to crashing services
