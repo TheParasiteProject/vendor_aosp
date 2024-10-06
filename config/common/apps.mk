@@ -6,6 +6,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     BtHelper
 
+ifneq ($(MAINLINE_INCLUDE_BTSERVICES_MODULE),false)
+# Ship custom libbluetooth_jni to system partition
+PRODUCT_PACKAGES += \
+    libbluetooth_jni
+endif
+
 # Camera
 ifneq ($(PRODUCT_NO_CAMERA),true)
 ifneq ($(TARGET_INCLUDE_APERTURE),false)
