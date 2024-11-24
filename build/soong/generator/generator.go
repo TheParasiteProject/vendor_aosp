@@ -28,7 +28,7 @@ import (
 )
 
 func init() {
-	android.RegisterModuleType("custom_generator", GeneratorFactory)
+	android.RegisterModuleType("lineage_generator", GeneratorFactory)
 }
 
 var String = proptools.String
