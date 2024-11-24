@@ -26,22 +26,11 @@ SOONG_CONFIG_NAMESPACES += lineageGlobalVars
 SOONG_CONFIG_lineageGlobalVars += \
     aapt_version_code \
     additional_gralloc_10_usage_bits \
-    camera_needs_miui_camera_mode_support \
-    camera_needs_camera_needs_depth_sensor_override \
-    camera_needs_client_info \
-    camera_needs_client_info_lib \
-    camera_needs_client_info_lib_oplus \
-    target_camera_package_name \
-    disable_bluetooth_le_read_buffer_size_v2 \
-    disable_bluetooth_le_set_host_feature \
     bootloader_message_offset \
     camera_override_format_from_reserved \
     gralloc_handle_has_custom_content_md_reserved_size \
     gralloc_handle_has_reserved_size \
     gralloc_handle_has_ubwcp_format \
-    needs_camera_boottime \
-    target_alternative_futex_waiters \
-    camera_uses_newer_hidl_override_format \
     target_health_charging_control_charging_path \
     target_health_charging_control_charging_enabled \
     target_health_charging_control_charging_disabled \
@@ -50,7 +39,6 @@ SOONG_CONFIG_lineageGlobalVars += \
     target_health_charging_control_supports_deadline \
     target_health_charging_control_supports_toggle \
     target_init_vendor_lib \
-    target_inputdispatcher_skip_event_key \
     target_ld_shim_libs \
     target_power_libperfmgr_mode_extension_lib \
     target_powershare_path \
@@ -60,11 +48,7 @@ SOONG_CONFIG_lineageGlobalVars += \
     target_trust_usb_control_path \
     target_trust_usb_control_enable \
     target_trust_usb_control_disable \
-    target_uses_prebuilt_dynamic_partitions \
-    uses_legacy_fd_fbdev \
-    uses_egl_display_array \
-    needs_oplus_tag \
-    include_miui_camera
+    uses_egl_display_array
 
 SOONG_CONFIG_NAMESPACES += lineageNvidiaVars
 SOONG_CONFIG_lineageNvidiaVars += \
@@ -120,7 +104,6 @@ TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS ?= true
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_DEADLINE ?= false
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_TOGGLE ?= true
 TARGET_INIT_VENDOR_LIB ?= vendor_init
-TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY ?= 0
 TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB ?= libperfmgr-ext
 TARGET_POWERSHARE_ENABLED ?= 1
 TARGET_POWERSHARE_DISABLED ?= 0
@@ -153,7 +136,6 @@ SOONG_CONFIG_lineageGlobalVars_target_health_charging_control_supports_toggle :=
 SOONG_CONFIG_lineageGlobalVars_target_trust_usb_control_path := $(TARGET_TRUST_USB_CONTROL_PATH)
 SOONG_CONFIG_lineageGlobalVars_target_trust_usb_control_enable := $(TARGET_TRUST_USB_CONTROL_ENABLE)
 SOONG_CONFIG_lineageGlobalVars_target_trust_usb_control_disable := $(TARGET_TRUST_USB_CONTROL_DISABLE)
-SOONG_CONFIG_lineageGlobalVars_target_inputdispatcher_skip_event_key := $(TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY)
 
 ifneq ($(filter $(QSSI_SUPPORTED_PLATFORMS),$(TARGET_BOARD_PLATFORM)),)
 SOONG_CONFIG_lineageQcomVars_qcom_display_headers_namespace := vendor/qcom/opensource/commonsys-intf/display
